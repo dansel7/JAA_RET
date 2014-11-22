@@ -1,0 +1,614 @@
+/*MODAL WINDOW*/
+#mask {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:9000;
+  background-color:#000000;
+  display:none;
+}
+  
+#boxes .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes #dialog {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes2 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes2 #dialog2 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes3 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes3 #dialog3 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes4 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes4 #dialog4 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes5 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes5 #dialog5 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes6 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes6 #dialog6 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes7 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes7 #dialog7 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes8 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes8 #dialog8 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes9 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes9 #dialog9 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes10 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes10 #dialog10 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes11 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes11 #dialog11 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes12 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes12 #dialog12 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes13 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes13 #dialog13 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes14 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes14 #dialog14 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes15 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes15 #dialog15 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes16 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes16 #dialog16 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes17 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes17 #dialog17 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes18 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes18 #dialog18 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes19 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes19 #dialog19 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes20 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes20 #dialog20 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+/*-------------*/
+
+/*ELIMINAR MODAL-----------------------------------------*/
+#boxes21 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes21 #dialog21 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes22 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes22 #dialog22 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes23 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes23 #dialog23 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes24 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes24 #dialog24 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes25 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes25 #dialog25 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes26 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes26 #dialog26 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes27 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes27 #dialog27 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes28 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes28 #dialog28 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes29 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes29 #dialog29 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes30 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes30 #dialog30 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes31 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes31 #dialog31 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes32 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes32 #dialog32 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes33 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes33 #dialog33 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes34 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes34 #dialog34 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes35 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes35 #dialog35 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes36 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes36 #dialog36 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes37 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes37 #dialog37 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes38 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes38 #dialog38 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes39 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes39 #dialog39 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+#boxes40 .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes40 #dialog40 {
+  width:518px;
+  padding:10px;
+  background-color:#ffffff;
+}
+/*--------------*/

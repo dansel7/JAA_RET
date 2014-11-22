@@ -1,0 +1,93 @@
+@font-face {
+    font-family: 'BebasRegular';
+    src: url('../fuentes/BEBAS___-webfont.eot');
+    src: url('../fuentes/BEBAS___-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fuentes/BEBAS___-webfont.woff') format('woff'),
+         url('../fuentes/BEBAS___-webfont.ttf') format('truetype'),
+         url('../fuentes/BEBAS___-webfont.svg#BebasRegular') format('svg');
+}
+html,body{margin:auto;height:100%;}
+.log{
+	background: #4ac9fc; /* Old browsers */
+background: -moz-linear-gradient(top,  #4ac9fc 1%, #28abe1 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#4ac9fc), color-stop(100%,#28abe1)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #4ac9fc 1%,#28abe1 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #4ac9fc 1%,#28abe1 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #4ac9fc 1%,#28abe1 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #4ac9fc 1%,#28abe1 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4ac9fc', endColorstr='#28abe1',GradientType=0 ); /* IE6-9 */
+height:403px;
+}
+.navegacion_int{background:url(../img/fondo.gif);}
+.linea-azul{background:#088ACD; height:10px;width:100%;margin-top:-25px;position:relative;}
+.fondo_log{
+    background: #c3c3c3; /* Old browsers */
+background: -moz-linear-gradient(top,  #c3c3c3 0%, #e6e6e6 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c3c3c3), color-stop(100%,#e6e6e6)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #c3c3c3 0%,#e6e6e6 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #c3c3c3 0%,#e6e6e6 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #c3c3c3 0%,#e6e6e6 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #c3c3c3 0%,#e6e6e6 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3c3c3', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */
+}
+.fondo_log2{
+    background: #F4F1EA;
+}
+.titulo{font-family:'BebasRegular';color:#FFFFFF;font-size:20px;margin-top:7px;}
+.tabla_log{width:100%;border-top:#FFFFFF 1px solid; margin-top:22px;}
+.log-slide{
+	height:403px;
+	border-bottom:8px #333333 solid;
+	background: #c3c3c3; /* Old browsers */
+background: -moz-linear-gradient(top,  #c3c3c3 0%, #e6e6e6 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c3c3c3), color-stop(100%,#e6e6e6)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #c3c3c3 0%,#e6e6e6 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #c3c3c3 0%,#e6e6e6 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #c3c3c3 0%,#e6e6e6 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #c3c3c3 0%,#e6e6e6 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3c3c3', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */
+}
+.log-slide2{
+    border-bottom:8px #333333 solid;
+    background: #c3c3c3; /* Old browsers */
+background: -moz-linear-gradient(top,  #c3c3c3 0%, #e6e6e6 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c3c3c3), color-stop(100%,#e6e6e6)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #c3c3c3 0%,#e6e6e6 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #c3c3c3 0%,#e6e6e6 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #c3c3c3 0%,#e6e6e6 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #c3c3c3 0%,#e6e6e6 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3c3c3', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */
+}
+.white{color:#FFFFFF;}
+.fondo_blanco{background:url(../img/fondo.gif);}
+.fondo_blanco2{background:#FFFFFF;}
+.banderas{background:#333333;}
+.parte2{height:186px;border-bottom: #B3B3B3 5px solid}
+.pie{background:url(../img/bg_pie.png) #1A1A1A no-repeat bottom right;width:100%;text-align:center;color:#808080;font-weight:bold;padding-top:30px;}
+label.valid {
+        }
+        label.error {
+            font-weight: bold;
+            color: red;
+            padding: 2px 8px;
+            margin-top: 2px;
+            font-size:12px;
+        }
+.login{
+    height:95.4%;
+    width:470px;
+    margin:auto;
+    display:table;
+    background: #eeeeee; /* Old browsers */
+background: -moz-linear-gradient(top,  #eeeeee 0%, #eeeeee 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #eeeeee 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #eeeeee 0%,#eeeeee 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #eeeeee 0%,#eeeeee 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #eeeeee 0%,#eeeeee 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+}
+.hijo_log{
+    display: table-cell;
+    vertical-align: middle;
+}

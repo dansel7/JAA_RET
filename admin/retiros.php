@@ -2,7 +2,7 @@
 session_start();
 if(isset($_SESSION['user_jaa'])){
 		$id_usuario=$_SESSION['user_jaa'];
-		include("../paginas/conexion.php");
+		include("../class/conexion.php");
 		$consulta="SELECT nombres,apellidos FROM usuarios WHERE id_usuario='$id_usuario'";
 		$res=mysql_query($consulta);
 		$nombres="";
@@ -170,7 +170,7 @@ function confirmacion(id) {
 	?>
               <form action="retiros.php" id="formulario" method="post" class="form-horizontal">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
                 <h3 id="myModalLabel">Modificando Retiro</h3>
               </div>              
                 <div class="modal-body">                
@@ -213,7 +213,7 @@ function confirmacion(id) {
               <div id="myModal3" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <form action="retiros.php" id="formulario" method="post" class="form-horizontal">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
                 <h3 id="myModalLabel">Agregando un Nuevo Retiro</h3>
               </div>
               <div class="modal-body">                
@@ -248,9 +248,33 @@ function confirmacion(id) {
               </form>
           </div>
           </div>
+            
+            
+            
+            
+              <div id="myModal4" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <form action="retiros.php" id="formulario" method="post" class="form-horizontal">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
+                <center><h3 id="myModalLabel">Confirmaci&oacute;n</h3></center>
+              </div>
+              <div class="modal-body">                
+                <div class="control-group">                                
+                    <label><center>Desea Reinicializar los datos de pagos e inscripciones?<br> (Esta accion regresara a cero las personas registradas)</center></label>          
+                </div>     
+              </div>
+              <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <button class="btn btn-primary" type="submit" name="reinicializar">Aceptar</button>
+              </div>
+              </form>
+          </div>
+            
+            
 <div class="span8">
  <div>
-    <a href="#myModal3" class="btn btn-success btn-block" role="button" data-toggle="modal">Agregar Retiro</a>
+     <a href="#myModal3" class="btn btn-success btn-block" role="button" data-toggle="modal">Agregar Retiro</a><br>
+         <center><a href="#myModal4" style="width:400px;background: #6666ff" class="btn btn-success btn-block" role="button" data-toggle="modal">Reinicializar Inscripciones y Pagos</a></center>
     <br>
     <br>
     <table id="lista_grupos" align="center" cellpadding="10" cellspacing="0">
@@ -367,6 +391,22 @@ if(isset($_REQUEST['eliminar_retiro'])){
   	   	echo "<script> alert('Retiro ha sido eliminado exitosamente.'); </script>";
       	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=retiros.php'>");
     }  
+}
+if(isset($_REQUEST['reinicializar'])){
+ $nombre=$_POST['nombre'];
+ $descripcion = $_POST['descripcion'];
+ $fecha=$_POST['fecha_evento'];
+ $abierto=$_POST['abierto'];
+ $id_retiro=$_POST['id'];
+ 
+ $consulta_up="UPDATE hermanos SET pago=\"no\"";
+ mysql_query($consulta_up);
+ 
+ $consulta_up="TRUNCATE TABLE inscripcion";
+ if(mysql_query($consulta_up)){
+		echo "<script>  alert('Se han Reinicializado los datos Exitosamente.'); </script>";		
+		echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=retiros.php'>");
+} 		
 }
 ?>
 <?php 

@@ -2,7 +2,7 @@
 session_start();
 if(isset($_SESSION['user_jaa'])){
 		$id_usuario=$_SESSION['user_jaa'];
-		include("../paginas/conexion.php");
+		include("../class/conexion.php");
 		$consulta="SELECT nombres,apellidos FROM usuarios WHERE id_usuario='$id_usuario'";
 		$res=mysql_query($consulta);
 		$nombres="";
@@ -46,7 +46,7 @@ $(function(){
 <div id="contenedor_header">
 <?php include("paginas/head_menu.php"); ?>
 </div>
-<div id="cuerpo">
+    <div id="cuerpo" >
 	<div id="contenedor1">
 		<div id="nav">
     		MENU PRINCIPAL
@@ -86,7 +86,7 @@ $(function(){
 			?>
         </div>
 	</div>
-    <div id="dash">
+    <div id="dash"  style="height:125px;background-image: url(../diseno/img/jaa_logo.png);background-repeat:no-repeat;  background-size: 200px 150px;">
     <table style="margin:auto;">
     	
     </table>

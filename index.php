@@ -44,22 +44,23 @@ $(document).ready(function() {
 <form name="form" class="login-form" action="index.php" method="post">
 
 	<!--HEADER-->
-    <div class="header">
-    <!--TITLE--><h1>Jovenes con Alas de Aguila </h1><!--END TITLE-->
+    <div class="header" style="background-image:url(diseno/img/bg_502.jpg);background-size:320px 300px">
+        <center><img src="diseno/img/logo.png" style="margin-top:-110px">
+        <!--TITLE--><h1>Jovenes con Alas de Aguila </h1></center><!--END TITLE-->
     <!--DESCRIPTION--><span>Ingresa tu correo electronico y password previamente registrados. </span><!--END DESCRIPTION-->
     </div>
     <!--END HEADER-->
 	
 	<!--CONTENT-->
-    <div class="content">
+    <div class="content" style="background-image:url(diseno/img/bg_502.jpg);background-size:300px 1px">
 	<!--USERNAME--><input type="text" name="email" tabindex="1" class="input username" placeholder="Nombre de usuario" required /><!--END USERNAME-->
     <!--PASSWORD--><input type="password" name="password" tabindex="2" class="input password" placeholder="Password" required /><!--END PASSWORD-->
     </div>
     <!--END CONTENT-->
     
     <!--FOOTER-->
-    <div class="footer">
-    <!--LOGIN BUTTON--><input type="submit" name="entrar" id="entrar" value="Login" class="button" /><!--END LOGIN BUTTON-->    
+    <div class="footer" style="background-image:url(diseno/img/bg_502.jpg);background-size:320px 1px">
+        <center><!--LOGIN BUTTON--><input style="float: center" type="submit" name="entrar" id="entrar" value="Login" class="button" /><!--END LOGIN BUTTON-->    </center>
     </div>
     <!--END FOOTER-->
 
@@ -75,7 +76,7 @@ $(document).ready(function() {
 </html>
 <?php
 if(isset($_REQUEST['entrar'])){
-include("paginas/conexion.php");
+include("../class/conexion.php");
 	$correo = $_POST['email'];
 	$contrasena = $_POST['password'];	
 	$res_correo="no";

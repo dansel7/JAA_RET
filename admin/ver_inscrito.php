@@ -2,7 +2,7 @@
 header("Content-Type: text/html;charset=utf-8");
 if(isset($_SESSION['user_jaa'])){
 		$id_usuario=$_SESSION['user_jaa'];
-		include("paginas/conexion.php");
+		include("../class/conexion.php");
 		mysql_query("SET NAMES 'utf8'");
 		$consulta="SELECT nombres,apellidos FROM usuarios WHERE id_usuario='$id_usuario'";
 		$res=mysql_query($consulta);
@@ -508,7 +508,7 @@ function mostrar_esp_ccdl(objeto){
 mysql_close();
 }
 else{
-	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://jaa.host56.com/index.php'>");//env�o al usuario a la pag. de inicio 
+	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");//env�o al usuario a la pag. de inicio 
 	    exit();
 }
 ?>

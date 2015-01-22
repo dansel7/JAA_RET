@@ -1,7 +1,7 @@
 <?php session_start();
 if(isset($_SESSION['user_jaa'])){
 		$id_usuario=$_SESSION['user_jaa'];
-		include("conexion.php");
+		include("../class/conexion.php");
 		$consulta="SELECT nombres,apellidos FROM usuarios WHERE id_usuario='$id_usuario'";
 		$res=mysql_query($consulta);
 		$nombres="";
@@ -45,7 +45,7 @@ $(function(){
 $('element_to_pop_up').bPopup({
             content:'image', //'ajax', 'iframe' or 'image'
             contentContainer:'.content',
-            loadUrl:'http://jaa.host56.com/paginas/camara/<?php echo $id_hermano;?>.jpg'
+            loadUrl:'http://localhost/jaa_retiros/paginas/camara/<?php echo $id_hermano;?>.jpg'
         });
 </script>
 </head>
@@ -75,14 +75,16 @@ $('element_to_pop_up').bPopup({
             <td></td>
         </tr>
         <?php
-        include('conexion.php');
-        $filtro="a";
+        
+        $filtro="";
         if(!isset($_GET['filtro'])){
-			$filtro = $_GET['filtro'];
+			$filtro =$_GET['filtro'];
 		}else{
 			$filtro = $_GET['filtro'];
 		}
+                if($filtro=="") $filtro="-";
         $consulta="SELECT * FROM hermanos WHERE nombres LIKE '$filtro%' ORDER BY edad ASC";
+       
 		$res=mysql_query($consulta);
 		$nombreh="";
 		$casos_totales=0;
@@ -139,7 +141,7 @@ $('element_to_pop_up').bPopup({
 <?php 
 mysql_close();
 }else{
-	//echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://jaa.host56.com/index.php'>");//env?o al usuario a la pag. de inicio 
+	//echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");//env?o al usuario a la pag. de inicio 
 	    exit();
 }
 ?>

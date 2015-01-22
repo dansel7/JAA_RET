@@ -1,7 +1,7 @@
 <?php
 
 header("Content-Type: text/html;charset=utf-8");
-include("conexion.php");
+include("../class/conexion.php");
 
 mysql_query("SET NAMES 'utf8'");
 

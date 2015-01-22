@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
-	include("conexion.php");
-mysql_query("SET NAMES 'utf8'");
+	include("../class/conexion.php");
+
 	require("fpdf.php");
 	
 	$id=$_GET['id'];
@@ -85,7 +85,7 @@ mysql_query("SET NAMES 'utf8'");
 	$pdf->Image('../diseno/img/aguila.png',20,8,43);	
 	
 	$pdf->Cell(160);
-	$pdf->Cell(20,10,'Nº '.$contador.'',1,1,'C');
+	$pdf->Cell(20,10,'No. '.$contador.'',1,1,'C');
 	$pdf->Ln();
 	$pdf->SetFont('Arial','B',11);
 	$pdf->Cell(50,0,'  DATOS GENERALES ',0,1,'L',false);
@@ -213,7 +213,7 @@ mysql_query("SET NAMES 'utf8'");
 	$pdf->Cell(0,10,'Firma de responsable                                  Firma de asistente',0,1,'C',false);
 	$pdf->Cell(0,11,'CLAUSURA DE COMPROMISO',1,1,'C',false);
 	$pdf->Ln(5);
-	$pdf->MultiCell(185,3,'Por este medio doy fe que es de mi conocimiento el reglamento establecido por el Ministerio JAA y me comprometo a cumplirlo y acatar todas las indicaciones que se me den en el centro de retiros. Además me comprometo a permanecer dentro de las instalaciones del Centro de Retiros  Dado que  la falta al reglamento  es considerada como falta grave por el Ministerio JAA, asumo las consecuencias que conlleve esto.');
+	$pdf->MultiCell(185,3,'Por este medio doy fe que es de mi conocimiento el reglamento establecido por el Ministerio JAA y me comprometo a cumplirlo y acatar todas las indicaciones que se me den en el centro de retiros. Ademï¿½s me comprometo a permanecer dentro de las instalaciones del Centro de Retiros  Dado que  la falta al reglamento  es considerada como falta grave por el Ministerio JAA, asumo las consecuencias que conlleve esto.');
 	$pdf->Output();
 
 ?>

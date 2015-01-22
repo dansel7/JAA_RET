@@ -1200,8 +1200,10 @@ function _parsejpg($file)
 {
 	//Extract info from a JPEG file
 	$a=GetImageSize($file);
-	if(!$a)
-		$this->Error('Missing or incorrect image file: '.$file);
+	if(!$a){
+             return array('w'=>$a[0], 'h'=>$a[1], 'cs'=>$colspace, 'bpc'=>$bpc, 'f'=>'DCTDecode', 'data'=>$data);
+	   $this->Error('Missing or incorrect image file: '.$file);
+        }
 	if($a[2]!=2)
 		$this->Error('Not a JPEG file: '.$file);
 	if(!isset($a['channels']) || $a['channels']==3)
@@ -1224,8 +1226,9 @@ function _parsepng($file)
 {
 	//Extract info from a PNG file
 	$f=fopen($file,'rb');
-	if(!$f)
+	if(!$f){ return array('w'=>$w, 'h'=>$h, 'cs'=>$colspace, 'bpc'=>$bpc, 'f'=>'FlateDecode', 'parms'=>$parms, 'pal'=>$pal, 'trns'=>$trns, 'data'=>$data);
 		$this->Error('Can\'t open image file: '.$file);
+        }
 	//Check signature
 	if($this->_readstream($f,8)!=chr(137).'PNG'.chr(13).chr(10).chr(26).chr(10))
 		$this->Error('Not a PNG file: '.$file);

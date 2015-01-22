@@ -1,7 +1,7 @@
 <?php session_start();
 if(isset($_SESSION['user_jaa'])){
 		$id_usuario=$_SESSION['user_jaa'];
-		include("conexion.php");
+		include("../class/conexion.php");
 		$consulta="SELECT nombres,apellidos FROM usuarios WHERE id_usuario='$id_usuario'";
 		$res=mysql_query($consulta);
 		$nombres="";
@@ -98,6 +98,21 @@ function mostrar_esp_ccdl(objeto){
 		document.getElementById("esp_ccdl").style.visibility = "hidden"; 
 	}
 }
+
+function mostrar_esp_fv(objeto){
+	var obj = objeto.checked;
+
+	if(obj){
+		//Muestra cuadro de especificacion para operacion.
+		document.getElementById("nom_grupo_fv").style.visibility = "visible"; 
+                document.getElementById("nom_grupo_fv").style.width="135px"; 
+	}
+	else{
+		document.getElementById("nom_grupo_fv").style.visibility = "hidden"; 
+                document.getElementById("nom_grupo_fv").style.width = 0; 
+                document.getElementById("nom_grupo_fv").value=""; 
+	}
+}
 </script>
 <body>
 <div id="contenedor_header">
@@ -168,10 +183,10 @@ function mostrar_esp_ccdl(objeto){
             </tr>
             <tr>
                 <td>
-				<textarea name="direccion" id="direccion" cols="26" rows="5" class="textbox_white" required="required" placeholder="Ingrese aqui direcci&oacute;n" style="font-size:12px;font-family:Arial;"></textarea>
+				<textarea name="direccion" id="direccion" cols="60" rows="10" class="textbox_white" required="required" placeholder="Ingrese aqui direcci&oacute;n" style="font-size:12px;font-family:Arial;"></textarea>
 				</td>
                 <td><input type="email" name="correo_electronico" size="22" value="" id="correo_electronico" class="textbox_white" required="required" placeholder="name@example.com" /></td>
-                <td><input type="text" name="documento" id= "documento" class="textbox_white" placeholder="Ingrese aqui solo numeros" onkeypress="return validar_numeros(event)" /></td>
+                <td><input type="text" name="dui" id= "dui" class="textbox_white" placeholder="Ingrese aqui solo numeros" onkeypress="return validar_numeros(event)" /></td>
             </tr>
             <tr><td colspan="3"><br /></td></tr>
             <tr>
@@ -270,9 +285,10 @@ function mostrar_esp_ccdl(objeto){
                 </td>
             </tr>
             <tr>
-            <td>Ministerio:</td>
+                <td>Ministerio:<br><br>&nbsp;</td>
                 <td>
                     <?php
+                    /*
 					$consulta_mi = "SELECT id_ministerio, nombre FROM ministerios WHERE id_ministerio=4 OR id_ministerio=5 OR id_ministerio=3 OR id_ministerio=1";
 					$res_mi=mysql_query($consulta_mi);	
                 	$i=0;
@@ -286,9 +302,18 @@ function mostrar_esp_ccdl(objeto){
 							$contador=0;
 						}
 					}
+                     */                    
 				?>
+                    
+                   GJ<input name="minis1" type="checkbox" id="minis1" value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   Formando Vidas<input onclick="mostrar_esp_fv(this)" name="minis2" type="checkbox" id="minis2" value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                   JAA<input name="minis3" type="checkbox" id="minis3" value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   Escuela Dominical<input name="minis4" type="checkbox" id="minis4" value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="nom_grupo_fv" id="nom_grupo_fv" style="visibility:hidden;width:0" class="textbox_white" value="" placeholder="Especifique Grupo FV" />
                 </td>
-                <td>Otro: <input type="text" name="otromi" id="otromi" class="textbox_white" value="" placeholder="Ministerio" size="25" /></td>
+            <td>Otro: <input type="text" name="otromi" id="otromi" class="textbox_white" value="" placeholder="Ministerio" size="25" /><br><br>&nbsp;
+                </td>
             </tr>
             <tr>
             <td>Talla de camisa:</td>
@@ -341,8 +366,9 @@ function mostrar_esp_ccdl(objeto){
         </table>
         </fieldset>
         <table style="margin:auto;width:100%">
-        <tr>
-            	<td align="center"><br><input type="submit" class="boton_general" value="Agregar usuario" name="agregar" /></td>
+            <tr>
+            	<td align="center"><br><b><center> Haga Clic para Continuar el Registro:</center></b>
+                <input type="submit" class="boton_general" value="Agregar usuario" name="agregar" /></td>
             </tr>
         </table>
 	</form>
@@ -355,9 +381,7 @@ function mostrar_esp_ccdl(objeto){
 </body>
 </html>
 <?php
-if(isset($_REQUEST['agregar'])){
-	include('conexion.php');
-	
+if(isset($_REQUEST['agregar'])){	
 	$nombres=$_POST['nombres'];
 	$nombres=strtolower($nombres);
 	$nombres=htmlspecialchars($nombres);
@@ -369,7 +393,7 @@ if(isset($_REQUEST['agregar'])){
 	$direccion=htmlspecialchars($direccion);
 	$correo_usuario=$_POST['correo_electronico'];
 	$genero=$_POST['sexo'];
-	$dui=$_POST['documento'];
+	$dui=$_POST['dui'];
 	$tel=$_POST['tel'];
 	$cel=$_POST['cel'];
 	$f_nac=$_POST['f_nacimiento'];
@@ -391,6 +415,7 @@ if(isset($_REQUEST['agregar'])){
 	
 	$gj = (isset($_POST['minis1'])) ? $_POST['minis1'] : "no";
 	$fv = (isset($_POST['minis2'])) ? $_POST['minis2'] : "no";
+        $nom_grupo_fv=(isset($_POST['nom_grupo_fv'])) ? $_POST['nom_grupo_fv'] : "";
 	$jaa = (isset($_POST['minis3'])) ? $_POST['minis3'] : "no";
 	$ed = (isset($_POST['minis4'])) ? $_POST['minis4'] : "no";
 		
@@ -415,7 +440,7 @@ TIMESTAMPDIFF(YEAR, \"".$f_nac."\", NOW()) as Edad";
 		
 	$id_usuario=$_SESSION['user_jaa'];
 
-			$consulta_new="INSERT INTO hermanos(id_hermano,nombres,apellidos,genero,direccion,correo,dui,telefono,celular,f_nac,p_nac,enf,ope,esp_ope,aler,esp_aler,ged,ccdl,bautizado,modulo,talla,edad,id_usuario,medicamento,contacto1,parentesco1,telefono1,celular1,correo1,contacto2,parentesco2,telefono2,celular2,correo2,ministerio,gj,fv,ed,jaa) VALUES(0,\"".mysql_real_escape_string($nombres)."\",\"".mysql_real_escape_string($apellidos)."\",\"".mysql_real_escape_string($genero)."\",\"".mysql_real_escape_string($direccion)."\",\"".mysql_real_escape_string($correo_usuario)."\",\"".mysql_real_escape_string($dui)."\",\"".mysql_real_escape_string($tel)."\",\"".mysql_real_escape_string($cel)."\",\"".mysql_real_escape_string($f_nac)."\",\"68\",\"".mysql_real_escape_string($enf)."\",\"".mysql_real_escape_string($ope)."\",\"".mysql_real_escape_string($esp_ope)."\",\"".mysql_real_escape_string($aler)."\",\"".mysql_real_escape_string($esp_aler)."\",\"".mysql_real_escape_string($ged)."\",\"".mysql_real_escape_string($ccdl)."\",\"".mysql_real_escape_string($bautizado)."\",\"".mysql_real_escape_string($modulo)."\",\"".mysql_real_escape_string($talla)."\",\"".mysql_real_escape_string($edad)."\",\"".mysql_real_escape_string($id_usuario)."\",\"".mysql_real_escape_string($aler_med)."\",\"".mysql_real_escape_string($contacto1)."\",\"".mysql_real_escape_string($parentesco1)."\",\"".mysql_real_escape_string($telefono1)."\",\"".mysql_real_escape_string($celular1)."\",\"".mysql_real_escape_string($correo1)."\",\"".mysql_real_escape_string($contacto2)."\",\"".mysql_real_escape_string($parentesco2)."\",\"".mysql_real_escape_string($telefono2)."\",\"".mysql_real_escape_string($celular2)."\",\"".mysql_real_escape_string($correo2)."\",\"".mysql_real_escape_string($ministerio)."\",\"".mysql_real_escape_string($gj)."\",\"".mysql_real_escape_string($fv)."\",\"".mysql_real_escape_string($ed)."\",\"".mysql_real_escape_string($jaa)."\")";
+			$consulta_new="INSERT INTO hermanos(id_hermano,nombres,apellidos,genero,direccion,correo,dui,telefono,celular,f_nac,p_nac,enf,ope,esp_ope,aler,esp_aler,ged,ccdl,bautizado,modulo,talla,edad,id_usuario,medicamento,contacto1,parentesco1,telefono1,celular1,correo1,contacto2,parentesco2,telefono2,celular2,correo2,ministerio,gj,fv,ed,jaa,nom_grupo_fv) VALUES(0,\"".mysql_real_escape_string($nombres)."\",\"".mysql_real_escape_string($apellidos)."\",\"".mysql_real_escape_string($genero)."\",\"".mysql_real_escape_string($direccion)."\",\"".mysql_real_escape_string($correo_usuario)."\",\"".mysql_real_escape_string($dui)."\",\"".mysql_real_escape_string($tel)."\",\"".mysql_real_escape_string($cel)."\",\"".mysql_real_escape_string($f_nac)."\",\"68\",\"".mysql_real_escape_string($enf)."\",\"".mysql_real_escape_string($ope)."\",\"".mysql_real_escape_string($esp_ope)."\",\"".mysql_real_escape_string($aler)."\",\"".mysql_real_escape_string($esp_aler)."\",\"".mysql_real_escape_string($ged)."\",\"".mysql_real_escape_string($ccdl)."\",\"".mysql_real_escape_string($bautizado)."\",\"".mysql_real_escape_string($modulo)."\",\"".mysql_real_escape_string($talla)."\",\"".mysql_real_escape_string($edad)."\",\"".mysql_real_escape_string($id_usuario)."\",\"".mysql_real_escape_string($aler_med)."\",\"".mysql_real_escape_string($contacto1)."\",\"".mysql_real_escape_string($parentesco1)."\",\"".mysql_real_escape_string($telefono1)."\",\"".mysql_real_escape_string($celular1)."\",\"".mysql_real_escape_string($correo1)."\",\"".mysql_real_escape_string($contacto2)."\",\"".mysql_real_escape_string($parentesco2)."\",\"".mysql_real_escape_string($telefono2)."\",\"".mysql_real_escape_string($celular2)."\",\"".mysql_real_escape_string($correo2)."\",\"".mysql_real_escape_string($ministerio)."\",\"".mysql_real_escape_string($gj)."\",\"".mysql_real_escape_string($fv)."\",\"".mysql_real_escape_string($ed)."\",\"".mysql_real_escape_string($jaa)."\",\"".mysql_real_escape_string($nom_grupo_fv)."\")";
 
 	if(mysql_query($consulta_new)){
 		echo "<script>  alert('Usuario agregado exitosamente.'); </script>";
@@ -432,7 +457,7 @@ TIMESTAMPDIFF(YEAR, \"".$f_nac."\", NOW()) as Edad";
 mysql_close();
 }
 else{
-	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://jaa.host56.com/index.php'>");//env�o al usuario a la pag. de inicio 
+	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");//env�o al usuario a la pag. de inicio 
 	    exit();
 }
 ?>

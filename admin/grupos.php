@@ -2,7 +2,7 @@
 session_start();
 if(isset($_SESSION['user_jaa'])){
 		$id_usuario=$_SESSION['user_jaa'];
-		include("../paginas/conexion.php");
+		include("../class/conexion.php");
 		$consulta="SELECT nombres,apellidos FROM usuarios WHERE id_usuario='$id_usuario'";
 		$res=mysql_query($consulta);
 		$nombres="";
@@ -156,7 +156,7 @@ function confirmacion(id) {
 	?>
               <form action="grupos.php" id="formulario" method="post" class="form-horizontal">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
                 <h3 id="myModalLabel">Modificando Grupo</h3>
               </div>
               <div class="modal-body">
@@ -208,7 +208,7 @@ function confirmacion(id) {
               <div id="myModal3" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <form action="grupos.php" id="formulario" method="post" class="form-horizontal">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
                 <h3 id="myModalLabel">Agregando un Nuevo Grupo</h3>
               </div>
               <div class="modal-body">

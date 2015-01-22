@@ -1,5 +1,5 @@
 <?php
-include("conexion.php");
+include("../../class/conexion.php");
 $per_page = 15; 
 if($_GET)
 {
@@ -29,7 +29,7 @@ $start = ($page-1)*$per_page;
             <td></td>
         </tr>
         <?php
-        include('conexion.php');
+        
         $consulta = "SELECT grupo.nombre as grupo, hermanos.id_hermano, hermanos.nombres, hermanos.apellidos, hermanos.edad, hermanos.telefono, hermanos.celular, hermanos.talla FROM hermanos INNER JOIN inscripcion ON inscripcion.id_hermano=hermanos.id_hermano INNER JOIN grupo ON inscripcion.id_grupo=grupo.id_grupo WHERE inscripcion.id_grupo<>1 ".$genero." AND inscripcion.pago='si' ORDER BY grupo.nombre ASC LIMIT $start,$per_page";
 		$res=mysql_query($consulta);
 		$nombreh="";

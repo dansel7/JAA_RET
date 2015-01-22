@@ -1,8 +1,8 @@
 <?php
 	session_start();
 	
-	session_destroy(); // destruyo la sesión 
-    echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://jaa.host56.com/index.php'>");
+	session_destroy(); // destruyo la sesiï¿½n 
+    echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");
     exit();
 ?>
 

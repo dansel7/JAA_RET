@@ -2,7 +2,7 @@
 header("Content-Type: text/html;charset=utf-8");
 if(isset($_SESSION['user_jaa'])){
 		$id_usuario=$_SESSION['user_jaa'];
-		include("conexion.php");
+		include("../class/conexion.php");
 		mysql_query("SET NAMES 'utf8'");
 		$consulta="SELECT nombres,apellidos FROM usuarios WHERE id_usuario='$id_usuario'";
 		$res=mysql_query($consulta);
@@ -115,6 +115,21 @@ function mostrar_esp_ccdl(objeto){
 		document.getElementById("esp_ccdl").style.visibility = "hidden"; 
 	}
 }
+function mostrar_esp_fv(objeto){
+	var obj = objeto.checked;
+
+	if(obj){
+		//Muestra cuadro de especificacion para operacion.
+		document.getElementById("nom_grupo_fv").style.visibility = "visible"; 
+                document.getElementById("nom_grupo_fv").style.width="135px"; 
+	}
+	else{
+		document.getElementById("nom_grupo_fv").style.visibility = "hidden"; 
+                document.getElementById("nom_grupo_fv").style.width = 0; 
+                document.getElementById("nom_grupo_fv").value=""; 
+	}
+}
+
 </script>
 <body>
 <div id="contenedor_header">
@@ -201,12 +216,8 @@ function mostrar_esp_ccdl(objeto){
 				$talla = $row_datos['talla'];
 				$modulo = $row_datos['modulo'];
 				$otromi = $row_datos['ministerio'];
-				
-				if($row_datos['pago']=="si"){
-					$pago = 'checked="true"'; 
-				}else{
-					$pago = ''; 
-				}
+				$nom_grupo_fv= $row_datos['nom_grupo_fv'];
+				$pago = $row_datos['pago']; 
 
 				if($row_datos['gj']=="si"){
 					$minis[1] = 'checked="true"'; 
@@ -283,7 +294,6 @@ function mostrar_esp_ccdl(objeto){
             	<td>Nombres:</td>
                 <td>Apellidos:</td>
                 <td>G&eacute;nero:</td>
-                <td>Fecha de nacimiento:</td>
             </tr>
             <tr>
                 <td><input type="text" name="nombres" id="nombres" value="<?php echo $nombres; ?>" class="textbox_white" required="required" placeholder="Ingrese aqui nombres" autofocus="autofocus" onkeypress="return validar_letras(event)" /></td>
@@ -293,26 +303,30 @@ function mostrar_esp_ccdl(objeto){
                 <input type="radio" id="sexo2" name="sexo" value="f" <?php echo $sexo_fdato; ?> /><label for="sexo2">Mujer</label>
                 </div>
             </td>
-            <td><input type="date" name="f_nacimiento" id="f_nacimiento" value="<?php echo $f_nac; ?>" class="textbox_white" required="required" placeholder="Ingrese aqui fecha de nacimiento" /></td> 
             </tr>
             <tr><td><br /></td></tr>
             <tr>
-            <td colspan="2">Direccion:</td>            
+            <td>Direccion:</td>
+            <td>Correo electr&oacute;nico:</td> 
+            <td>DUI:</td>
             </tr>
             <tr>
-                <td colspan="2">
-				<textarea name="direccion" id="direccion" cols="100" rows="10" class="textbox_white" required="required" placeholder="Ingrese aqui direcci&oacute;n" style="font-size:12px;font-family:Arial;"><?php echo $direccion; ?></textarea>
-				</td>                             
+                <td>
+		<textarea name="direccion" id="direccion" cols="60" rows="10" class="textbox_white" required="required" placeholder="Ingrese aqui direcci&oacute;n" style="font-size:12px;font-family:Arial;"><?php echo $direccion; ?></textarea>
+		</td>                             
+               <td><input type="email" name="correo_electronico" size="25" value="<?php echo $correo; ?>" id="correo_electronico" class="textbox_white" required="required" placeholder="name@example.com" /></td>  
+               <td><input type="text" name="dui" id= "dui" class="textbox_white" value="<?php echo $dui; ?>" placeholder="Ingrese aqui solo numeros" onkeypress="return validar_numeros(event)" /></td>
             </tr>
             <tr><td colspan="3"><br /></td></tr>
             <tr>
             	<td>Telefono:</td>
                 <td>Celular:</td> 
-				<td>Correo electr&oacute;nico:</td>       
+		<td>Fecha de nacimiento:</td>      
             </tr>
             <tr>
                 <td><input type="text" name="tel" id= "tel" value="<?php echo $telefono; ?>" class="textbox_white" required="required" placeholder="Ingrese aqui solo numeros" onkeypress="return validar_numeros(event)" /></td>
-                <td><input type="text" name="cel" id= "cel" value="<?php echo $celular; ?>" class="textbox_white" required="required" placeholder="Ingrese aqui solo numeros" onkeypress="return validar_numeros(event)" /></td>       				<td><input type="email" name="correo_electronico" size="25" value="<?php echo $correo; ?>" id="correo_electronico" class="textbox_white" required="required" placeholder="name@example.com" /></td>  
+                <td><input type="text" name="cel" id= "cel" value="<?php echo $celular; ?>" class="textbox_white" required="required" placeholder="Ingrese aqui solo numeros" onkeypress="return validar_numeros(event)" /></td>       				
+                <td><input type="date" name="f_nacimiento" id="f_nacimiento" value="<?php echo $f_nac; ?>" class="textbox_white" required="required" placeholder="Ingrese aqui fecha de nacimiento" /></td> 
             </tr>
             <tr><td colspan="3"><br /></td></tr>
         </table>
@@ -408,9 +422,9 @@ function mostrar_esp_ccdl(objeto){
                 </td>
             </tr>
             <tr>
-            <td>Ministerio:</td>
+            <td>Ministerio:<br><br>&nbsp;</td>
                 <td>
-                    <?php
+                    <?php /*
 					$consulta_mi = "SELECT id_ministerio, nombre FROM ministerios WHERE id_ministerio=4 OR id_ministerio=5 OR id_ministerio=3 OR id_ministerio=1";
 					$res_mi=mysql_query($consulta_mi);	
                 	$i=0;
@@ -424,9 +438,16 @@ function mostrar_esp_ccdl(objeto){
 							$contador=0;
 						}
 					}
+                     */
 				?>
+                     GJ<input name="minis1" type="checkbox" id="minis1"  <?php echo $minis[1];?> value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   Formando Vidas<input onclick="mostrar_esp_fv(this)"   <?php echo $minis[2];?>name="minis2" type="checkbox" id="minis2" value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                   JAA<input name="minis3" type="checkbox" id="minis3"   <?php echo $minis[3];?>value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   Escuela Dominical<input name="minis4" type="checkbox" <?php echo $minis[4];?>id="minis4" value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="nom_grupo_fv" id="nom_grupo_fv" style="visibility:hidden;width:0" class="textbox_white" value="<?php echo $nom_grupo_fv;?>" placeholder="Especifique Grupo FV" />
                 </td>
-                <td>Otro: <input type="text" name="otromi" id="otromi" class="textbox_white" value="<?php echo $otromi;?>" placeholder="Ministerio" size="25" /></td>
+                <td>Otro: <input type="text" name="otromi" id="otromi" class="textbox_white" value="<?php echo $otromi;?>" placeholder="Ministerio" size="25" /><br><br>&nbsp;</td>
             </tr>
             <tr>
             <td>Talla de camisa:</td>
@@ -488,11 +509,26 @@ function mostrar_esp_ccdl(objeto){
         </fieldset>
         <table style="margin:auto;width:100%">
         <tr>
-		<td><input type="checkbox" name="pago" id="pago" value="si" <?php echo $pago;?>> ¿Cancelado pago de retiro?</td>
-		</tr>
-		<tr>
-            	<td align="center"><br><input type="submit" class="boton_general" value="Guardar cambios" name="guardar" id="guardar" /></td><td align="center"><br><input type="submit" class="boton_general" value="Tomar foto" name="foto" id="foto" /></td><td align="center"><br><input type="submit" class="boton_general" value="Imprimir" name="imprimir" /></td>
-            </tr>
+        <td colspan="3" align="center" style="width:33.33%"><br>
+            <?php if($pago=="no"){
+            ?>
+                <input type="submit" class="boton_especial" value="Registrar Pago" name="reg_pago" />
+            <?php
+            } 
+            ?>
+        </td>
+        </tr>
+        <tr>
+        <td align="center" style="width:33.33%"><br>
+           <input type="submit" class="boton_general" value="Tomar foto" name="foto" id="foto" />
+        </td>
+        <td align="center" style="width:33.33%"><br>
+            <input type="submit" class="boton_general" value="Actualizar Datos" name="guardar" id="guardar" />
+        </td>
+        <td align="center" style="width:33.33%"><br>
+             <input type="submit" class="boton_general" value="Imprimir Ficha de Inscripcion" name="imprimir" />
+        </td>
+         </tr>
         </table>
 	</form>
    	</div>
@@ -505,7 +541,7 @@ function mostrar_esp_ccdl(objeto){
 </html>
 <?php
 if(isset($_REQUEST['guardar'])){
-	include('conexion.php');	
+		
 	//$nombres=$_POST['nombres'];
 	//$nombres=strtolower($nombres);
 	$nombres=$_POST['nombres'];
@@ -518,8 +554,8 @@ if(isset($_REQUEST['guardar'])){
 	$correo_usuario=$_POST['correo_electronico'];
 	
 	$genero=$_POST['sexo'];
-	//$dui=$_POST['documento'];
-	$dui=0;
+	$dui=$_POST['dui'];
+	
 	$tel=$_POST['tel'];
 	$cel=$_POST['cel'];
 	$f_nac=$_POST['f_nacimiento'];
@@ -541,6 +577,7 @@ if(isset($_REQUEST['guardar'])){
 	
 	$gj = (isset($_POST['minis1'])) ? $_POST['minis1'] : "no";
 	$fv = (isset($_POST['minis2'])) ? $_POST['minis2'] : "no";
+        $nom_grupo_fv=(isset($_POST['nom_grupo_fv'])) ? $_POST['nom_grupo_fv'] : "";
 	$jaa = (isset($_POST['minis3'])) ? $_POST['minis3'] : "no";
 	$ed = (isset($_POST['minis4'])) ? $_POST['minis4'] : "no";
 	
@@ -558,36 +595,29 @@ if(isset($_REQUEST['guardar'])){
 	$correo2 = $_POST['correo2'];
 
 	//Calculando edad
-	$consulta_edad = "SELECT DATE(\"".$f_nac."\") as FechaNacimiento,
-CURDATE() as FechaActual,
-TIMESTAMPDIFF(YEAR, \"".$f_nac."\", NOW()) as Edad";
+	$consulta_edad = "SELECT DATE(\"".$f_nac."\") as FechaNacimiento,CURDATE() as FechaActual,TIMESTAMPDIFF(YEAR, \"".$f_nac."\", NOW()) as Edad";
 	$res_edad=mysql_query($consulta_edad);
 	while($row_edad=mysql_fetch_array($res_edad)){
 			$edad=$row_edad['Edad'];
 		}		
 	$id_usuario=$_SESSION['user_jaa'];
 	$id_hermano = $_GET['id'];
-	$consulta_update="UPDATE hermanos SET nombres=\"".mysql_real_escape_string($nombres)."\", apellidos=\"".mysql_real_escape_string($apellidos)."\",genero=\"".mysql_real_escape_string($genero)."\",direccion=\"".mysql_real_escape_string($direccion)."\",correo=\"".mysql_real_escape_string($correo_usuario)."\",dui=\"".mysql_real_escape_string($dui)."\",telefono=\"".mysql_real_escape_string($tel)."\",celular=\"".mysql_real_escape_string($cel)."\",f_nac=\"".mysql_real_escape_string($f_nac)."\",p_nac=\"68\",enf=\"".mysql_real_escape_string($enf)."\",ope=\"".mysql_real_escape_string($ope)."\",esp_ope=\"".mysql_real_escape_string($esp_ope)."\",aler=\"".mysql_real_escape_string($aler)."\",esp_aler=\"".mysql_real_escape_string($esp_aler)."\",ged=\"".mysql_real_escape_string($ged)."\",ccdl=\"".mysql_real_escape_string($ccdl)."\",bautizado=\"".mysql_real_escape_string($bautizado)."\",modulo=\"".mysql_real_escape_string($modulo)."\",talla=\"".mysql_real_escape_string($talla)."\",edad=\"".mysql_real_escape_string($edad)."\",id_usuario=\"".mysql_real_escape_string($id_usuario)."\",medicamento=\"".mysql_real_escape_string($aler_med)."\",contacto1=\"".mysql_real_escape_string($contacto1)."\",parentesco1=\"".mysql_real_escape_string($parentesco1)."\",telefono1=\"".mysql_real_escape_string($telefono1)."\",celular1=\"".mysql_real_escape_string($celular1)."\",correo1=\"".mysql_real_escape_string($correo1)."\",contacto2=\"".mysql_real_escape_string($contacto2)."\",parentesco2=\"".mysql_real_escape_string($parentesco2)."\",telefono2=\"".mysql_real_escape_string($telefono2)."\",celular2=\"".mysql_real_escape_string($celular2)."\",correo2=\"".mysql_real_escape_string($correo2)."\",ministerio=\"".mysql_real_escape_string($ministerio)."\",gj=\"".mysql_real_escape_string($gj)."\",fv=\"".mysql_real_escape_string($fv)."\",ed=\"".mysql_real_escape_string($ed)."\",jaa=\"".mysql_real_escape_string($jaa)."\",retiro='1-2013',pago=\"$pago\" WHERE id_hermano=$id_hermano";
+	$consulta_update="UPDATE hermanos SET nombres=\"".mysql_real_escape_string($nombres)."\", apellidos=\"".mysql_real_escape_string($apellidos)."\",genero=\"".mysql_real_escape_string($genero)."\",direccion=\"".mysql_real_escape_string($direccion)."\",correo=\"".mysql_real_escape_string($correo_usuario)."\",dui=\"".mysql_real_escape_string($dui)."\",telefono=\"".mysql_real_escape_string($tel)."\",celular=\"".mysql_real_escape_string($cel)."\",f_nac=\"".mysql_real_escape_string($f_nac)."\",p_nac=\"68\",enf=\"".mysql_real_escape_string($enf)."\",ope=\"".mysql_real_escape_string($ope)."\",esp_ope=\"".mysql_real_escape_string($esp_ope)."\",aler=\"".mysql_real_escape_string($aler)."\",esp_aler=\"".mysql_real_escape_string($esp_aler)."\",ged=\"".mysql_real_escape_string($ged)."\",ccdl=\"".mysql_real_escape_string($ccdl)."\",bautizado=\"".mysql_real_escape_string($bautizado)."\",modulo=\"".mysql_real_escape_string($modulo)."\",talla=\"".mysql_real_escape_string($talla)."\",edad=\"".mysql_real_escape_string($edad)."\",id_usuario=\"".mysql_real_escape_string($id_usuario)."\",medicamento=\"".mysql_real_escape_string($aler_med)."\",contacto1=\"".mysql_real_escape_string($contacto1)."\",parentesco1=\"".mysql_real_escape_string($parentesco1)."\",telefono1=\"".mysql_real_escape_string($telefono1)."\",celular1=\"".mysql_real_escape_string($celular1)."\",correo1=\"".mysql_real_escape_string($correo1)."\",contacto2=\"".mysql_real_escape_string($contacto2)."\",parentesco2=\"".mysql_real_escape_string($parentesco2)."\",telefono2=\"".mysql_real_escape_string($telefono2)."\",celular2=\"".mysql_real_escape_string($celular2)."\",correo2=\"".mysql_real_escape_string($correo2)."\",ministerio=\"".mysql_real_escape_string($ministerio)."\",gj=\"".mysql_real_escape_string($gj)."\",fv=\"".mysql_real_escape_string($fv)."\",ed=\"".mysql_real_escape_string($ed)."\",jaa=\"".mysql_real_escape_string($jaa)."\",nom_grupo_fv=\"".mysql_real_escape_string($nom_grupo_fv)."\",retiro='1-2013' WHERE id_hermano=$id_hermano";
 	
 	if(mysql_query($consulta_update)){
 		echo "<script>  alert('Se han guardado los cambios.'); </script>";
 		echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=modificar_usuario.php?id=$id_hermano'>");
-		} 		
-}
-if(isset($_REQUEST['imprimir'])){
+		}     
+        }
+        
+        
+if(isset($_REQUEST['reg_pago'])){
     $id_usuario=$_SESSION['user_jaa'];
 	$id_hermano = $_GET['id'];
-	//Consultar pago en tabla hermanos
-		$pago="";
-		$consulta_pago="SELECT pago FROM hermanos WHERE id_hermano=".$id_hermano;
-		$res_pago=mysql_query($consulta_pago);
-			while($row_pago=mysql_fetch_array($res_pago)){
-			$pago=$row_pago['pago'];
-		}
-	if($pago=="no"){
-		echo "<script>  alert('No se ha efectuado el pago.'); </script>";
-		echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=modificar_usuario.php?id=$id_hermano'>");
-	}else{
+	//Hacer un Update del Campo pago
+		$consulta_update="UPDATE hermanos SET pago=\"si\" WHERE id_hermano=$id_hermano";
+                mysql_query($consulta_update);  
+        //Comprobar que no este ya en la tabla de inscripciones
 		$consulta_existencia="SELECT id_hermano FROM inscripcion WHERE id_hermano='".$id_hermano."'";
 		$res_ex=mysql_query($consulta_existencia);
 		$existe=0;
@@ -596,25 +626,50 @@ if(isset($_REQUEST['imprimir'])){
 		}			
 		if($existe==0){
 		//Si no existe inscripcion nueva
-		$consulta_registro = "INSERT INTO inscripcion (id_hermano,id_usuario,fecha,pago) VALUES(\"".mysql_real_escape_string($id_hermano)."\", \"".mysql_real_escape_string($id_usuario)."\", now(), \"".mysql_real_escape_string($pago)."\")";
+		$consulta_registro = "INSERT INTO inscripcion (id_hermano,id_usuario,fecha,pago) VALUES(\"".mysql_real_escape_string($id_hermano)."\", \"".mysql_real_escape_string($id_usuario)."\", now(), \"si\")";
 		echo "<script>  alert('Usuario inscrito exitosamente.'); </script>";
-		if(mysql_query($consulta_registro)){
-			echo " <script>window.open('impresion_usuario.php?id=$id_hermano','','height=400,width=400'); </script>";
-		}
+		
+                if(mysql_query($consulta_registro)){
+		   echo " <script>window.open('impresion_recibo.php?id=$id_hermano','','height=400,width=400'); </script>";
+                    echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=modificar_usuario.php?id=$id_hermano'>");    
+                }
 		}else{
 			echo "<script>  alert('Usuario previamente registrado.'); </script>";
-			echo " <script>window.open('impresion_usuario.php?id=$id_hermano','','height=400,width=400'); </script>";
+                        
+			echo " <script>window.open('impresion_recibo.php?id=$id_hermano','','height=400,width=400'); </script>";
 		}	
-	}
+
 }
+
+if(isset($_REQUEST['imprimir'])){
+$id_hermano = $_GET['id'];
+	//Consultar pago en tabla hermanos
+		$pago="";
+		$consulta_pago="SELECT pago FROM hermanos WHERE id_hermano=".$id_hermano;
+		$res_pago=mysql_query($consulta_pago);
+		while($row_pago=mysql_fetch_array($res_pago)){
+			$pago=$row_pago['pago'];
+		}
+                echo $pago;
+	if($pago=="no"){
+		echo "<script>  alert('No se ha efectuado el pago.'); </script>";
+		echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=modificar_usuario.php?id=$id_hermano'>");
+	}else if($pago=="si"){
+        echo " <script>window.open('impresion_usuario.php?id=$id_hermano','','height=400,width=400'); </script>";
+        }
+}
+
 if(isset($_REQUEST['foto'])){
 	$id_hermano = $_GET['id'];
-	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=/paginas/camara/index.php?id=$id_hermano'>");
+	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=camara/index.php?id=$id_hermano'>");
 }
 mysql_close();
 }
 else{
-	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://jaa.host56.com/index.php'>");//env�o al usuario a la pag. de inicio 
+	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");//env�o al usuario a la pag. de inicio 
 	    exit();
 }
+
+
 ?>
+<script>mostrar_esp_fv(document.getElementById("minis2"));</script>

@@ -45,7 +45,7 @@ $(function(){
 $('element_to_pop_up').bPopup({
             content:'image', //'ajax', 'iframe' or 'image'
             contentContainer:'.content',
-            loadUrl:'http://localhost/jaa_retiros/paginas/camara/<?php echo $id_hermano;?>.jpg'
+            loadUrl:'http://retirosjaa.jovenesjaa.com/paginas/camara/<?php echo $id_hermano;?>.jpg'
         });
 </script>
 </head>
@@ -141,7 +141,7 @@ $('element_to_pop_up').bPopup({
 <?php 
 mysql_close();
 }else{
-	//echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");//env?o al usuario a la pag. de inicio 
+	//echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://retirosjaa.jovenesjaa.com/index.php'>");//env?o al usuario a la pag. de inicio 
 	    exit();
 }
 ?>

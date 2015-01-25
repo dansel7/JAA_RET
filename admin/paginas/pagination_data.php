@@ -7,16 +7,30 @@ if($_GET)
 $page=$_GET['page'];
 $g=$_GET['g'];
 	if($g==1){
-		$genero="AND hermanos.genero='m'";
+		$genero=" AND hermanos.genero='m'";
 	}else{
-		$genero="AND hermanos.genero='f'";
+		$genero=" AND hermanos.genero='f'";
 	}
 }
+$fv="";
+$e1="";
+$e2="";
+if(isset($_GET['fv'])){
+   
+    $fv=($_GET['fv']=="")?"": " AND hermanos.fv='{$_GET['fv']}'";
+    $e1=($_GET['e1']=="")?"": " AND hermanos.edad >={$_GET['e1']}";
+    $e2=($_GET['e2']=="")?"": " AND hermanos.edad <={$_GET['e2']}";
+}else{
+ $_GET['fv']="no";
+ $_GET['e1']="";
+ $_GET['e2']="";  
+}
+    
 //get table contents
 $start = ($page-1)*$per_page;
 ?>
-	<form action="asignando_inscritos.php?g=<?php echo $g?>" id="formulario" method="post">
-    <table id="lista_inscritos" align="center" cellpadding="10" cellspacing="0">
+	<form action="asignando_inscritos.php?g=<?php echo $g?>&fv=<?php echo $_GET['fv'];?>&e1=<?php echo $_GET['e1'];?>&e2=<?php echo $_GET['e2'];?>" id="formulario" method="post">
+            <table id="lista_inscritos" align="center" cellpadding="10" cellspacing="0">
     	<tr class="tr_cabeza">
     	    <td></td>
         	<td>USUARIO</td>
@@ -31,7 +45,7 @@ $start = ($page-1)*$per_page;
         </tr>
         <?php
         
-        $consulta = "SELECT hermanos.id_hermano, hermanos.nombres, hermanos.apellidos, hermanos.edad, hermanos.telefono, hermanos.celular, hermanos.talla FROM hermanos INNER JOIN inscripcion ON inscripcion.id_hermano=hermanos.id_hermano WHERE inscripcion.id_grupo=1 ".$genero." AND inscripcion.pago='si' ORDER BY edad ASC LIMIT $start,$per_page";
+        $consulta = "SELECT hermanos.id_hermano, hermanos.nombres, hermanos.apellidos, hermanos.edad, hermanos.telefono, hermanos.celular, hermanos.talla FROM hermanos INNER JOIN inscripcion ON inscripcion.id_hermano=hermanos.id_hermano WHERE inscripcion.id_grupo=1 ".$genero.$fv.$e1.$e2." AND inscripcion.pago='si' ORDER BY edad ASC LIMIT $start,$per_page";
 		$res=mysql_query($consulta);
 		$nombreh="";
 		$casos_totales=0;
@@ -80,7 +94,9 @@ $start = ($page-1)*$per_page;
 				";
 							}
 	?>
-	    </table>
+        
+    </table><br>
+            <?php echo "<center><b>-------------------- $cont Registros --------------------</b></center>   ";?>
 	    <table align="center" cellpadding="10" cellspacing="0">
 	<tr>
 	<td>
@@ -98,6 +114,7 @@ $start = ($page-1)*$per_page;
 	<td>
 	<button class="btn btn-success btn-block" type="submit" name="asignar_grupo">Agregar a grupo</button>
 	</td>
+        </tr>
 	</table>
 	</form>
 <br>

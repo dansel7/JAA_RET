@@ -1,3 +1,7 @@
+<?php
+error_reporting(0);
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -76,7 +80,7 @@ $(document).ready(function() {
 </html>
 <?php
 if(isset($_REQUEST['entrar'])){
-include("../class/conexion.php");
+include("class/conexion.php");
 	$correo = $_POST['email'];
 	$contrasena = $_POST['password'];	
 	$res_correo="no";

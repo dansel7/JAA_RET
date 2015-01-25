@@ -45,7 +45,7 @@ $(function(){
 $('element_to_pop_up').bPopup({
             content:'image', //'ajax', 'iframe' or 'image'
             contentContainer:'.content',
-            loadUrl:'http://localhost/jaa_retiros/paginas/camara/<?php echo $id_hermano;?>.jpg'
+            loadUrl:'http://retirosjaa.jovenesjaa.com/paginas/camara/<?php echo $id_hermano;?>.jpg'
         });
 </script>
 </head>
@@ -74,7 +74,6 @@ $('element_to_pop_up').bPopup({
             <td></td>
         </tr>
         <?php
-        include('paginas/conexion.php');
         $consulta = "SELECT hermanos.id_hermano, hermanos.nombres, hermanos.apellidos, hermanos.edad, hermanos.telefono, hermanos.celular, hermanos.talla FROM hermanos INNER JOIN inscripcion ON inscripcion.id_hermano=hermanos.id_hermano WHERE inscripcion.id_grupo=(SELECT id_grupo FROM lideres WHERE id_lider=$id_usuario) AND inscripcion.pago='si' ORDER BY edad ASC";
 		$res=mysql_query($consulta);
 		$nombreh="";
@@ -130,7 +129,7 @@ $('element_to_pop_up').bPopup({
 <?php 
 mysql_close();
 }else{
-	//echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");//env?o al usuario a la pag. de inicio 
+	//echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://retirosjaa.jovenesjaa.com/index.php'>");//env?o al usuario a la pag. de inicio 
 	    exit();
 }
 ?>

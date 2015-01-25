@@ -18,11 +18,31 @@ if($_GET){
 	if($g==1){
 		$genero=" AND hermanos.genero='m'";
 	}else{
-		$genero="AND hermanos.genero='f'";
+		$genero=" AND hermanos.genero='f'";
 	}
 }
+$fv="";
+$e1="";
+$e2="";
+if(isset($_GET['fv'])){
+    if($_GET['fv']=="si") {
+    $fv=" AND hermanos.fv='{$_GET['fv']}'";
+}else{
+     $fv=" AND hermanos.fv='no'";
+     $_GET['fv']='no';
+    }
+    
+    $e1=" AND hermanos.edad >={$_GET['e1']}";
+    $e2=" AND hermanos.edad <={$_GET['e2']}";
+}else{
+ $_GET['fv']="no";
+ $_GET['e1']="";
+ $_GET['e2']="";  
+}
+    
 //getting number of rows and calculating no of pages
-$sql = "SELECT inscripcion.pago, inscripcion.id_grupo, hermanos.id_hermano, hermanos.nombres, hermanos.apellidos, hermanos.edad, hermanos.telefono, hermanos.celular, hermanos.talla FROM hermanos INNER JOIN inscripcion ON inscripcion.id_hermano=hermanos.id_hermano WHERE inscripcion.id_grupo=1 ".$genero." AND inscripcion.pago='si' ORDER BY edad ASC";
+$sql = "SELECT inscripcion.pago, inscripcion.id_grupo, hermanos.id_hermano, hermanos.nombres, hermanos.apellidos, hermanos.edad, hermanos.telefono, hermanos.celular, hermanos.talla FROM hermanos INNER JOIN inscripcion ON inscripcion.id_hermano=hermanos.id_hermano WHERE inscripcion.id_grupo=1 ".$genero.$fv.$e1.$e2." AND inscripcion.pago='si' ORDER BY edad ASC";
+
 $rsd = mysql_query($sql);
 $count = mysql_num_rows($rsd);
 $pages = ceil($count/$per_page)
@@ -48,7 +68,7 @@ $pages = ceil($count/$per_page)
 	};
    //Default Starting Page Results
 	$("#pagination li:first").css({'color' : '#FF0084'}).css({'border' : 'none'});
-	$("#content").load("paginas/pagination_data.php?page=1&g=<?php echo $_GET['g'];?>", Hide_Load());
+	$("#content").load("paginas/pagination_data.php?page=1&g=<?php echo $_GET['g'];?>&fv=<?php echo $_GET['fv'];?>&e1=<?php echo $_GET['e1'];?>&e2=<?php echo $_GET['e2'];?>", Hide_Load());
 
 
 
@@ -66,11 +86,23 @@ $pages = ceil($count/$per_page)
 		//Loading Data
 		var pageNum = this.id;
 		
-		$("#content").load("paginas/pagination_data.php?page=" + pageNum, Hide_Load()+"&g=<?php echo $_GET['g'];?>");
+		$("#content").load("paginas/pagination_data.php?page=" + pageNum, Hide_Load()+"&g=<?php echo $_GET['g'];?>&fv=<?php echo $_GET['fv'];?>&e1=<?php echo $_GET['e1'];?>&e2=<?php echo $_GET['e2'];?>");
 	});
 	
 	
 });
+
+function marcar(source) 
+	{
+		checkboxes=document.getElementsByTagName('input'); //obtenemos todos los controles del tipo Input
+		for(i=0;i<checkboxes.length;i++) //recoremos todos los controles
+		{
+			if(checkboxes[i].type == "checkbox") //solo si es un checkbox entramos
+			{
+				checkboxes[i].checked=source.checked; //si es un checkbox le damos el valor del checkbox que lo llamó (Marcar/Desmarcar Todos)
+			}
+		}
+	}
 	</script>
 <style>
 #loading { 
@@ -150,6 +182,46 @@ $(function(){
 			?>
         </div>
 	</div>
+    <br>
+    <div>
+        <fieldset><legend><center>
+           <form action="asignacion.php?g=<?php echo $g;?>" name="form" id="form" method="post">
+               
+           Formando Vidas: <input type="checkbox" name="fv" id="fv" value="si" <?php if($_GET['fv']=="si") echo "checked"; ?> >
+             |  Rango de Edad de: <select name="edad1" style="width:60px" id="edad1" class="textbox_white" >
+                    <?php
+					$consulta_edad = "select edad from hermanos where edad < 100 and edad > 9 group by edad asc";
+					$res_edad=mysql_query($consulta_edad);
+                                       
+						while($row_edad=mysql_fetch_array($res_edad)){
+                                                if($row_edad['edad']== $_GET['e1']) {$selected="selected";}
+			    			else{$selected="";}
+                                                echo "<option value=\"".$row_edad['edad']."\" $selected>".$row_edad['edad']."</option>";
+						}				
+					
+				?>
+                    </select> 
+             a: <select name="edad2" style="width:60px" id="edad2" class="textbox_white" >
+                    <?php
+					$consulta_edad = "select edad from hermanos where edad < 100 and edad > 9 group by edad asc";
+					$res_edad=mysql_query($consulta_edad);
+                                        
+						while($row_edad=mysql_fetch_array($res_edad)){	
+                                                if($row_edad['edad']== $_GET['e2']) {$selected="selected";}
+                                                else{$selected="";}
+			    			echo "<option value=\"".$row_edad['edad']."\" $selected>".$row_edad['edad']."</option>";
+						}				
+					
+				?>
+                    </select> 
+             
+	   <input type="submit" style="height:29px" class="boton_especial" value="Agrupacion Automatica" name="agrupar" />
+           </form>
+               <input type="checkbox" onclick="marcar(this);" /> Marcar/Desmarcar Todos
+                </center>
+                </legend>
+        </fieldset>
+    </div><br>
 	<div id="content" ></div>
 	<table width="800px" align="center">
 	<tr><td>
@@ -164,7 +236,22 @@ $(function(){
 	</ul>	
 	</td></tr></table><br><br><br><br><br>
 	</div>
-<?php include("../paginas/footer.php"); ?>
+    
+<?php include("../paginas/footer.php"); 
+$fvs="";
+$edad1="";
+$edad2="";
+if(isset($_REQUEST['agrupar'])){
+	$fvs = isset($_POST['fv'])?$_POST['fv']:"no";
+        $edad1=$_POST['edad1'];
+        $edad2=$_POST['edad2'];
+        
+	echo "<script type=\"text/javascript\">window.location=\"asignacion.php?g=$g&fv=$fvs&e1=$edad1&e2=$edad2\";</script>";	
+}
+?>
+
+
+?>
 </body>
 </html>
 <?php 

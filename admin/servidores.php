@@ -325,7 +325,9 @@ function confirmacion(id) {
           </div>
 <div class="span8">
  <div>
+    <div style="width:300px;margin:0 auto">
     <a href="#myModal3" class="btn btn-success btn-block" role="button" data-toggle="modal">Agregar Servidor</a>
+</div>
     <br>
     <br>
     <table id="lista_grupos" align="center" cellpadding="10" cellspacing="0">

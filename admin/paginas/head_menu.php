@@ -32,7 +32,7 @@ if(isset($_SESSION['user_jaa'])){
                                 <li>
                                 <table>
                                 	<tr>
-                                    	<td><img src="../diseno/img/users_business_32.png" /></td><td>USUARIOS</td>
+                                    	<td><img src="../diseno/img/users_business_32.png" /></td><td>SERVIDORES</td>
                                      </tr>
                                 </table>
                                 <ul class="submenu" style="width:150px !important;">
@@ -67,13 +67,13 @@ if(isset($_SESSION['user_jaa'])){
                         	<tr>
                             	<td></td>
                                 <td><span class="nombre_usuario"><?php echo $nombres ?></span><br /></td>
-                                <td><img src="http://localhost/jaa_retiros/diseno/img/down.png" /></td>
+                                <td><img src="http://retirosjaa.jovenesjaa.com/diseno/img/down.png" /></td>
                             </tr>
                         </table>
                         <ul class="submenu" style="width:195px !important;">
                         <li><a href="">PERFIL</a></li>
-                        <li><a href="http://localhost/jaa_retiros/paginas/reporte_listado.php">REPORTES</a></li>
-                        <li><a href="http://localhost/jaa_retiros/paginas/cerrar_sesion.php" style="color:#C1272D">CERRAR SESION</a></li>
+                        <li><a href="http://retirosjaa.jovenesjaa.com/paginas/reporte_listado.php">REPORTES</a></li>
+                        <li><a href="http://retirosjaa.jovenesjaa.com/paginas/cerrar_sesion.php" style="color:#C1272D">CERRAR SESION</a></li>
                         </ul>
                         </li>
                         </ul>
@@ -83,7 +83,7 @@ if(isset($_SESSION['user_jaa'])){
             </header>
 		<?php
 	}else{
-	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");//env�o al usuario a la pag. de inicio 
+	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://retirosjaa.jovenesjaa.com/index.php'>");//env�o al usuario a la pag. de inicio 
     exit();
 }
 ?>

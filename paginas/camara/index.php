@@ -79,8 +79,8 @@ if(isset($_SESSION['user_jaa'])){
                                      </tr>
                                 </table>
                                 <ul class="submenu" style="width:150px !important;">
-                                	<li><a href="http://localhost/jaa_retiros/paginas/nuevo_usuario.php">AGREGAR USUARIO</a></li>
-                                    <li><a href="http://localhost/jaa_retiros/paginas/index.php">BUSCAR USUARIO</a></li>
+                                	<li><a href="http://retirosjaa.jovenesjaa.com/paginas/nuevo_usuario.php">AGREGAR USUARIO</a></li>
+                                    <li><a href="http://retirosjaa.jovenesjaa.com/paginas/index.php">BUSCAR USUARIO</a></li>
                                 </ul>
                                 </li>
                                 </ul>
@@ -97,7 +97,7 @@ if(isset($_SESSION['user_jaa'])){
                         	<tr>
                             	<td></td>
                                 <td><span class="nombre_usuario"><?php echo $nombres ?></span><br /></td>
-                                <td><img src="http://localhost/jaa_retiros/diseno/img/down.png" /></td>
+                                <td><img src="http://retirosjaa.jovenesjaa.com/diseno/img/down.png" /></td>
                             </tr>
                         </table>
                         <ul class="submenu" style="width:195px !important;">
@@ -113,7 +113,7 @@ if(isset($_SESSION['user_jaa'])){
             </header>
 		<?php
 	}else{
-	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");//env�o al usuario a la pag. de inicio 
+	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://retirosjaa.jovenesjaa.com/index.php'>");//env�o al usuario a la pag. de inicio 
     exit();
 }
 ?>
@@ -193,7 +193,7 @@ if(isset($_SESSION['user_jaa'])){
 <?php 
 mysql_close();
 }else{
-	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");//env?o al usuario a la pag. de inicio 
+	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://retirosjaa.jovenesjaa.com/index.php'>");//env?o al usuario a la pag. de inicio 
 	    exit();
 }
 ?>

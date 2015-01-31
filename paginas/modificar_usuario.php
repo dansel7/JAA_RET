@@ -28,6 +28,10 @@ if(isset($_SESSION['user_jaa'])){
 <script type="text/javascript" src="../js/jquery.tipsy.js"></script>
 <link href="../diseno/css/tipsy.css" rel="stylesheet" type="text/css" />
 <link href="../diseno/css/tipsy-docs.css" rel="stylesheet" type="text/css" />
+<link href="../diseno/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="../diseno/css/estilo2.css" rel="stylesheet" media="screen">
+       <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../diseno/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('#nav1>li').hover(
@@ -129,7 +133,31 @@ function mostrar_esp_fv(objeto){
                 document.getElementById("nom_grupo_fv").value=""; 
 	}
 }
+function beca_pago(objeto){
+	var obj = objeto.checked;
 
+	if(obj){
+		//Muestra cuadro de especificacion para operacion.
+		document.getElementById("check1").disabled=true; 
+                document.getElementById("check2").disabled=true; 
+                document.getElementById("check3").disabled=true;
+                document.getElementById("check4").disabled=false; 
+                document.getElementById("check5").disabled=false; 
+                document.getElementById("check6").disabled=false;
+                
+                document.getElementById("check4").checked=true; 
+	}
+	else{
+		document.getElementById("check1").disabled=false; 
+                document.getElementById("check2").disabled=false; 
+                document.getElementById("check3").disabled=false; 
+                document.getElementById("check4").disabled=true; 
+                document.getElementById("check5").disabled=true; 
+                document.getElementById("check6").disabled=true; 
+                
+                document.getElementById("check1").checked=true; 
+	}
+}
 </script>
 <body>
 <div id="contenedor_header">
@@ -195,7 +223,7 @@ function mostrar_esp_fv(objeto){
 				$apellidos = $row_datos['apellidos'];
 				$direccion = $row_datos['direccion'];
 				$correo = $row_datos['correo'];
-				$dui = $row_datos['dui'];
+				
 				$telefono = $row_datos['telefono'];
 				$celular = $row_datos['celular'];
 				$f_nac = $row_datos['f_nac'];
@@ -298,24 +326,30 @@ function mostrar_esp_fv(objeto){
             <tr>
                 <td><input type="text" name="nombres" id="nombres" value="<?php echo $nombres; ?>" class="textbox_white" required="required" placeholder="Ingrese aqui nombres" autofocus="autofocus" onkeypress="return validar_letras(event)" /></td>
                 <td><input type="text" name="apellidos" id="apellidos" value="<?php echo $apellidos; ?>" class="textbox_white" required="required" placeholder="Ingrese aqui apellidos" autofocus="autofocus" onkeypress="return validar_letras(event)" /></td>
-                <td><div id="sexo" >
-                <input type="radio" id="sexo1" name="sexo" value="m" <?php echo $sexo_mdato; ?> /><label for="sexo1">Hombre</label>
-                <input type="radio" id="sexo2" name="sexo" value="f" <?php echo $sexo_fdato; ?> /><label for="sexo2">Mujer</label>
+                <td><div id="sexo">
+                    <table><tr><td>
+                    <input type="radio" id="sexo1" name="sexo" value="m" <?php echo $sexo_mdato; ?> /><label for="sexo1">Hombre&nbsp;&nbsp;</label>
+                            </td>
+                            <td>
+                    <input type="radio" id="sexo2" name="sexo" value="f" <?php echo $sexo_fdato; ?> /><label for="sexo2">&nbsp;Mujer</label>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </td>
             </tr>
             <tr><td><br /></td></tr>
             <tr>
             <td>Direccion:</td>
-            <td>Correo electr&oacute;nico:</td> 
-            <td>DUI:</td>
+            <td colspan="2">Correo electr&oacute;nico:</td> 
+            
             </tr>
             <tr>
                 <td>
 		<textarea name="direccion" id="direccion" cols="60" rows="10" class="textbox_white" required="required" placeholder="Ingrese aqui direcci&oacute;n" style="font-size:12px;font-family:Arial;"><?php echo $direccion; ?></textarea>
 		</td>                             
                <td><input type="email" name="correo_electronico" size="25" value="<?php echo $correo; ?>" id="correo_electronico" class="textbox_white" required="required" placeholder="name@example.com" /></td>  
-               <td><input type="text" name="dui" id= "dui" class="textbox_white" value="<?php echo $dui; ?>" placeholder="Ingrese aqui solo numeros" onkeypress="return validar_numeros(event)" /></td>
+               
             </tr>
             <tr><td colspan="3"><br /></td></tr>
             <tr>
@@ -338,10 +372,13 @@ function mostrar_esp_fv(objeto){
 					¿Padece de alguna enfermedad que requiere tratamiento continuo?
                     </td>
                     <td colspan="2">
-                    <div id="enfermedad">
-						<input type="radio" id="si_enf" name="enf" value="si" <?php echo $enf_si; ?> /><label for="si_enf">Si</label>
-                		<input type="radio" id="no_enf" name="enf" value="no" <?php echo $enf_no; ?> /><label for="no_enf">No</label>
-					</div>
+                    <div id="enfermedad"><table><tr><td>
+                                    <input type="radio" id="si_enf" name="enf" value="si" <?php echo $enf_si; ?> /><label for="si_enf">Si&nbsp;&nbsp;</label>
+                		</td><td>
+                                <input type="radio" id="no_enf" name="enf" value="no" <?php echo $enf_no; ?> /><label for="no_enf">&nbsp;No</label>
+				</td></tr>
+                                </table>
+                    </div>
 				</td><td></td>
 			</tr>
         </table>
@@ -351,9 +388,13 @@ function mostrar_esp_fv(objeto){
             	¿Ha sido operado(a) alguna vez?</td>
                 <td>
                 <div id="operacion" >
-					<input type="radio" id="si_oper" name="oper" value="si" <?php echo $ope_si; ?> onclick="mostrar_esp_operacion(this)" /><label for="si_oper">Si</label>
-                	<input type="radio" id="no_oper" name="oper" value="no" <?php echo $ope_no; ?> onclick="mostrar_esp_operacion(this)" /><label for="no_oper">No</label>
-				</div>      	
+                    <table><tr><td>
+			<input type="radio" id="si_oper" name="oper" value="si" <?php echo $ope_si; ?> onclick="mostrar_esp_operacion(this)" /><label for="si_oper">Si&nbsp;&nbsp;</label>
+                	</td><td>
+                        <input type="radio" id="no_oper" name="oper" value="no" <?php echo $ope_no; ?> onclick="mostrar_esp_operacion(this)" /><label for="no_oper">&nbsp;No</label>
+                        </td></tr>
+                    </table>
+                        </div>      	
                 </td>
                 <td>
                 <div id="esp_operacion" style="visibility:hidden;">
@@ -367,9 +408,13 @@ function mostrar_esp_fv(objeto){
             	¿Es usted alergico(a)?</td>
                 <td>
                 <div id="alergia" >
-					<input type="radio" id="si_aler" name="aler" <?php echo $aler_si; ?> value="si" onclick="mostrar_esp_alergia(this)" /><label for="si_aler">Si</label>
-                	<input type="radio" id="no_aler" name="aler" <?php echo $aler_no; ?> value="no"  onclick="mostrar_esp_alergia(this)" /><label for="no_aler">No</label>
-				</div>                	
+                    <table><tr><td>
+			<input type="radio" id="si_aler" name="aler" <?php echo $aler_si; ?> value="si" onclick="mostrar_esp_alergia(this)" /><label for="si_aler">Si&nbsp;&nbsp;</label>
+                	</td><td>
+                        <input type="radio" id="no_aler" name="aler" <?php echo $aler_no; ?> value="no"  onclick="mostrar_esp_alergia(this)" /><label for="no_aler">&nbsp;No</label>
+			</td></tr>
+                    </table>	
+                        </div>                	
                 </td>
                 <td>
                 <div id="esp_alergia" style="visibility:hidden;">
@@ -388,9 +433,13 @@ function mostrar_esp_fv(objeto){
             	<td>
             	¿Ha estado o est&aacute; en CCDL?</td><td>
                 <div id="divccdl" >
-					<input type="radio" id="si_ccdl" name="ccdl" value="si" <?php echo $ccdl_si;?> onclick="mostrar_esp_ccdl(this)" /><label for="si_ccdl">Si</label>
-                	<input type="radio" id="no_ccdl" name="ccdl" value="no" <?php echo $ccdl_no;?>  onclick="mostrar_esp_ccdl(this)" /><label for="no_ccdl">No</label>
-				</div>
+                    <table><tr><td>
+                                <input type="radio" id="si_ccdl" name="ccdl" value="si" <?php echo $ccdl_si;?> onclick="mostrar_esp_ccdl(this)" /><label for="si_ccdl">Si&nbsp;&nbsp;</label>
+                	</td><td>
+                        <input type="radio" id="no_ccdl" name="ccdl" value="no" <?php echo $ccdl_no;?>  onclick="mostrar_esp_ccdl(this)" /><label for="no_ccdl">&nbsp;No</label>
+			</td></tr>
+                    </table>	
+                        </div>
                 <td>                	
                 <div id="esp_ccdl" style="visibility:hidden;">Modulo:
                     <select name="modulo" id="modulo" class="textbox_white" >
@@ -416,10 +465,13 @@ function mostrar_esp_fv(objeto){
             </tr>
             <tr>
             <td>Bautizado(a):</td>
-                <td>
-                	<input type="radio" id="si_ba" name="ba" value="si" <?php echo $ba_si;?> /><label for="si_ba">Si</label>
-                	<input type="radio" id="no_ba" name="ba" value="no" <?php echo $ba_no;?> /><label for="no_ba">No</label>
-                </td>
+                <td><table><tr><td>
+                	<input type="radio" id="si_ba" name="ba" value="si" <?php echo $ba_si;?> /><label for="si_ba">Si&nbsp;&nbsp;</label>
+                            </td><td>
+                        <input type="radio" id="no_ba" name="ba" value="no" <?php echo $ba_no;?> /><label for="no_ba">&nbsp;No</label>
+                        </td></tr>
+                    </table>	
+                            </td>
             </tr>
             <tr>
             <td>Ministerio:<br><br>&nbsp;</td>
@@ -440,10 +492,10 @@ function mostrar_esp_fv(objeto){
 					}
                      */
 				?>
-                     GJ<input name="minis1" type="checkbox" id="minis1"  <?php echo $minis[1];?> value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   Formando Vidas<input onclick="mostrar_esp_fv(this)"   <?php echo $minis[2];?>name="minis2" type="checkbox" id="minis2" value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
-                   JAA<input name="minis3" type="checkbox" id="minis3"   <?php echo $minis[3];?>value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   Escuela Dominical<input name="minis4" type="checkbox" <?php echo $minis[4];?>id="minis4" value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     GJ&nbsp;<input name="minis1" type="checkbox" id="minis1"  <?php echo $minis[1];?> value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   Formando Vidas&nbsp;<input onclick="mostrar_esp_fv(this)"   <?php echo $minis[2];?>name="minis2" type="checkbox" id="minis2" value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                   JAA&nbsp;<input name="minis3" type="checkbox" id="minis3"   <?php echo $minis[3];?>value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   Escuela Dominical&nbsp;&nbsp;<input name="minis4" type="checkbox" <?php echo $minis[4];?>id="minis4" value='si' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="text" name="nom_grupo_fv" id="nom_grupo_fv" style="visibility:hidden;width:0" class="textbox_white" value="<?php echo $nom_grupo_fv;?>" placeholder="Especifique Grupo FV" />
                 </td>
@@ -507,12 +559,14 @@ function mostrar_esp_fv(objeto){
             </tr>
         </table>
         </fieldset>
+        
+       
         <table style="margin:auto;width:100%">
         <tr>
         <td colspan="3" align="center" style="width:33.33%"><br>
             <?php if($pago=="no"){
             ?>
-                <input type="submit" class="boton_especial" value="Registrar Pago" name="reg_pago" />
+               <a href="#pagoMod" class="boton_especial" role="button" data-toggle="modal">Registrar Pago</a> 
             <?php
             } 
             ?>
@@ -531,6 +585,33 @@ function mostrar_esp_fv(objeto){
          </tr>
         </table>
 	</form>
+        
+         <div id="pagoMod" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+             <form action="modificar_usuario.php?id=<?php echo $_GET['id'];?>" id="formulario" method="post" class="form-horizontal">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+                <center><h3 id="myModalLabel">Registro de Pago</h3></center>
+              </div>
+              <div class="modal-body">                
+                <div class="control-group" align="left" style="margin-left:35%;font-size:21px">                                
+                    <label  style="font-size:22px">Seleccione el Valor:</label>          
+                    <input type="radio" name="ValorPago" id="check1" value="33" checked> $33<br>
+                    <input type="radio" name="ValorPago" id="check2" value="30"> $30<br>
+                    <input type="radio" name="ValorPago" id="check3" value="20"> $20
+                    <hr>
+                    <input type="checkbox" name="becado" onclick="beca_pago(this);" value="si"> Becado<br><br>
+                    <input type="radio" name="ValorPago" id="check4" value="16.50"disabled> $16.50<br>
+                    <input type="radio" name="ValorPago" id="check5" value="15" disabled> $15<br>
+                    <input type="radio" name="ValorPago" id="check6" value="13" disabled> $13<br>
+                </div>     
+              </div>
+              <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <button class="btn btn-primary" type="submit" name="reg_pago">Seleccionar Pago</button>
+              </div>
+              </form>
+              </div>
+        
    	</div>
     <div id="foot_body">
     	<div id="esquina"></div>
@@ -554,7 +635,7 @@ if(isset($_REQUEST['guardar'])){
 	$correo_usuario=$_POST['correo_electronico'];
 	
 	$genero=$_POST['sexo'];
-	$dui=$_POST['dui'];
+	
 	
 	$tel=$_POST['tel'];
 	$cel=$_POST['cel'];
@@ -602,7 +683,7 @@ if(isset($_REQUEST['guardar'])){
 		}		
 	$id_usuario=$_SESSION['user_jaa'];
 	$id_hermano = $_GET['id'];
-	$consulta_update="UPDATE hermanos SET nombres=\"".mysql_real_escape_string($nombres)."\", apellidos=\"".mysql_real_escape_string($apellidos)."\",genero=\"".mysql_real_escape_string($genero)."\",direccion=\"".mysql_real_escape_string($direccion)."\",correo=\"".mysql_real_escape_string($correo_usuario)."\",dui=\"".mysql_real_escape_string($dui)."\",telefono=\"".mysql_real_escape_string($tel)."\",celular=\"".mysql_real_escape_string($cel)."\",f_nac=\"".mysql_real_escape_string($f_nac)."\",p_nac=\"68\",enf=\"".mysql_real_escape_string($enf)."\",ope=\"".mysql_real_escape_string($ope)."\",esp_ope=\"".mysql_real_escape_string($esp_ope)."\",aler=\"".mysql_real_escape_string($aler)."\",esp_aler=\"".mysql_real_escape_string($esp_aler)."\",ged=\"".mysql_real_escape_string($ged)."\",ccdl=\"".mysql_real_escape_string($ccdl)."\",bautizado=\"".mysql_real_escape_string($bautizado)."\",modulo=\"".mysql_real_escape_string($modulo)."\",talla=\"".mysql_real_escape_string($talla)."\",edad=\"".mysql_real_escape_string($edad)."\",id_usuario=\"".mysql_real_escape_string($id_usuario)."\",medicamento=\"".mysql_real_escape_string($aler_med)."\",contacto1=\"".mysql_real_escape_string($contacto1)."\",parentesco1=\"".mysql_real_escape_string($parentesco1)."\",telefono1=\"".mysql_real_escape_string($telefono1)."\",celular1=\"".mysql_real_escape_string($celular1)."\",correo1=\"".mysql_real_escape_string($correo1)."\",contacto2=\"".mysql_real_escape_string($contacto2)."\",parentesco2=\"".mysql_real_escape_string($parentesco2)."\",telefono2=\"".mysql_real_escape_string($telefono2)."\",celular2=\"".mysql_real_escape_string($celular2)."\",correo2=\"".mysql_real_escape_string($correo2)."\",ministerio=\"".mysql_real_escape_string($ministerio)."\",gj=\"".mysql_real_escape_string($gj)."\",fv=\"".mysql_real_escape_string($fv)."\",ed=\"".mysql_real_escape_string($ed)."\",jaa=\"".mysql_real_escape_string($jaa)."\",nom_grupo_fv=\"".mysql_real_escape_string($nom_grupo_fv)."\",retiro='1-2013' WHERE id_hermano=$id_hermano";
+	$consulta_update="UPDATE hermanos SET nombres=\"".mysql_real_escape_string($nombres)."\", apellidos=\"".mysql_real_escape_string($apellidos)."\",genero=\"".mysql_real_escape_string($genero)."\",direccion=\"".mysql_real_escape_string($direccion)."\",correo=\"".mysql_real_escape_string($correo_usuario)."\",telefono=\"".mysql_real_escape_string($tel)."\",celular=\"".mysql_real_escape_string($cel)."\",f_nac=\"".mysql_real_escape_string($f_nac)."\",p_nac=\"68\",enf=\"".mysql_real_escape_string($enf)."\",ope=\"".mysql_real_escape_string($ope)."\",esp_ope=\"".mysql_real_escape_string($esp_ope)."\",aler=\"".mysql_real_escape_string($aler)."\",esp_aler=\"".mysql_real_escape_string($esp_aler)."\",ged=\"".mysql_real_escape_string($ged)."\",ccdl=\"".mysql_real_escape_string($ccdl)."\",bautizado=\"".mysql_real_escape_string($bautizado)."\",modulo=\"".mysql_real_escape_string($modulo)."\",talla=\"".mysql_real_escape_string($talla)."\",edad=\"".mysql_real_escape_string($edad)."\",id_usuario=\"".mysql_real_escape_string($id_usuario)."\",medicamento=\"".mysql_real_escape_string($aler_med)."\",contacto1=\"".mysql_real_escape_string($contacto1)."\",parentesco1=\"".mysql_real_escape_string($parentesco1)."\",telefono1=\"".mysql_real_escape_string($telefono1)."\",celular1=\"".mysql_real_escape_string($celular1)."\",correo1=\"".mysql_real_escape_string($correo1)."\",contacto2=\"".mysql_real_escape_string($contacto2)."\",parentesco2=\"".mysql_real_escape_string($parentesco2)."\",telefono2=\"".mysql_real_escape_string($telefono2)."\",celular2=\"".mysql_real_escape_string($celular2)."\",correo2=\"".mysql_real_escape_string($correo2)."\",ministerio=\"".mysql_real_escape_string($ministerio)."\",gj=\"".mysql_real_escape_string($gj)."\",fv=\"".mysql_real_escape_string($fv)."\",ed=\"".mysql_real_escape_string($ed)."\",jaa=\"".mysql_real_escape_string($jaa)."\",nom_grupo_fv=\"".mysql_real_escape_string($nom_grupo_fv)."\",retiro='1-2013' WHERE id_hermano=$id_hermano";
 	
 	if(mysql_query($consulta_update)){
 		echo "<script>  alert('Se han guardado los cambios.'); </script>";
@@ -614,8 +695,11 @@ if(isset($_REQUEST['guardar'])){
 if(isset($_REQUEST['reg_pago'])){
     $id_usuario=$_SESSION['user_jaa'];
 	$id_hermano = $_GET['id'];
+        $valorPago = $_POST['ValorPago'];
+	$becado = (isset($_POST['becado'])) ? $_POST['becado'] : "no";;
 	//Hacer un Update del Campo pago
-		$consulta_update="UPDATE hermanos SET pago=\"si\" WHERE id_hermano=$id_hermano";
+		$consulta_update="UPDATE hermanos SET pago=\"si\",valorPago=$valorPago,becado=\"$becado\" WHERE id_hermano=$id_hermano";
+                
                 mysql_query($consulta_update);  
         //Comprobar que no este ya en la tabla de inscripciones
 		$consulta_existencia="SELECT id_hermano FROM inscripcion WHERE id_hermano='".$id_hermano."'";
@@ -637,6 +721,7 @@ if(isset($_REQUEST['reg_pago'])){
 			echo "<script>  alert('Usuario previamente registrado.'); </script>";
                         
 			echo " <script>window.open('impresion_recibo.php?id=$id_hermano','','height=400,width=400'); </script>";
+                        echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=modificar_usuario.php?id=$id_hermano'>");    
 		}	
 
 }
@@ -650,7 +735,7 @@ $id_hermano = $_GET['id'];
 		while($row_pago=mysql_fetch_array($res_pago)){
 			$pago=$row_pago['pago'];
 		}
-                echo $pago;
+   
 	if($pago=="no"){
 		echo "<script>  alert('No se ha efectuado el pago.'); </script>";
 		echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=modificar_usuario.php?id=$id_hermano'>");
@@ -666,7 +751,7 @@ if(isset($_REQUEST['foto'])){
 mysql_close();
 }
 else{
-	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://retirosjaa.jovenesjaa.com/index.php'>");//env�o al usuario a la pag. de inicio 
+	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");//env�o al usuario a la pag. de inicio 
 	    exit();
 }
 

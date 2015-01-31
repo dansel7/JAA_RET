@@ -1,6 +1,20 @@
 <?php
 error_reporting(0);
-
+session_start();
+if(isset($_SESSION['estado'])){
+                if($_SESSION['estado']=="1"){
+			header("Location: paginas/index.php");
+                        die();
+		}
+		else if($_SESSION['estado']=="2"){
+			header("Location: admin/index.php");
+                        die();
+		}
+                else if($_SESSION['estado']=="3"){
+			header("Location: servidor/index.php");
+                        die();
+		}
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -98,8 +112,9 @@ while($row=mysql_fetch_array($res)){
 	}
 	
 if($correo==$res_correo && $contrasena==$res_contrasena && $id_usuario!=0){
-		session_start();
+		
 		$_SESSION['user_jaa'] = $id_usuario;
+                $_SESSION['estado'] = $estado;
 		$ruta="";
 		if($estado=="1"){
 			$ruta="<META HTTP-EQUIV='Refresh' CONTENT='0; URL=paginas/index.php'>";

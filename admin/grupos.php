@@ -21,9 +21,11 @@ if(isset($_SESSION['user_jaa'])){
 <![endif]-->
 <link href="../diseno/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
 <link href="../diseno/css/estilo2.css" rel="stylesheet" media="screen">
+<link href="../diseno/bootstrap/css/bootstrap.colorpickersliders.css" rel="stylesheet" type="text/css" media="all"> 
     
 <link href="../diseno/css/estilo.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	$('#nav1>li').hover(
@@ -46,6 +48,15 @@ $(function(){
 </script>
 <script>
 $(document).ready(function(){
+    //Color Picker
+    $("input#color").ColorPickerSliders({
+    placement: 'bottom',
+    color: 'red',
+    swatches: ['white','red', 'green','lightgreen','skyblue', 'darkblue'],
+    customswatches: false,
+    order:{}
+  });
+    
 	$('#formulario').validate({
       rules: {
         nombre: {
@@ -85,6 +96,8 @@ function confirmacion(id) {
 <!--Carga mas rapida-->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="../diseno/bootstrap/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tinycolor/0.11.1/tinycolor.min.js"></script>
+    <script src="../diseno/bootstrap/js/bootstrap.colorpickersliders.js"></script>
     <script src="../js/jquery.validate.js"></script>
 </head>
 <body>
@@ -144,6 +157,7 @@ function confirmacion(id) {
 		while($row_mod=mysql_fetch_array($res_mod)){
 			$nombre=$row_mod['nombre'];
 			$capacidad=$row_mod['total'];
+                        $color=$row_mod['color'];
 			$abierto=$row_mod['abierto'];
 			if($abierto=="2"){
 				$si_a=" Checked ";
@@ -180,6 +194,11 @@ function confirmacion(id) {
                     <input type="text" id="nombre" name="nombre" class="textbox_white" value="<?php echo $nombre;?>" />
                   </div>
                   <br>
+                      <label class="control-label" for="nombre">Color del grupo: </label>
+                  <div class="controls">
+                    <input type="text" id="color" name="color" value="<?php echo $color;?>" class="demo-popup" style="cursor: pointer" data-color-format="hex" />
+                  </div
+                  <br><br>
                   <label class="control-label" for="capacidad">Capacidad: </label>
                   <div class="controls">
                     <input type="number" min="5" max="20" id="capacidad" name="capacidad" value="<?php echo $capacidad;?>" class="textbox_white" placeholder="5" />
@@ -232,6 +251,11 @@ function confirmacion(id) {
                     <input type="text" id="nombre" name="nombre" class="textbox_white" />
                   </div>
                   <br>
+                  <label class="control-label" for="nombre">Color del grupo: </label>
+                  <div class="controls">
+                    <input type="text" id="color" name="color" class="demo-popup" style="cursor: pointer" data-color-format="hex" />
+                  </div>
+                  <br>
                   <label class="control-label" for="capacidad">Capacidad: </label>
                   <div class="controls">
                     <input type="number" min="5" max="20" id="capacidad" name="capacidad" class="textbox_white" placeholder="5" />
@@ -264,6 +288,7 @@ function confirmacion(id) {
             <td>NOMBRE DE GRUPO</td>
             <td>CAPACIDAD</td>
             <td>ACTUAL</td>
+            <td>COLOR</td>
             <td colspan="3" align="center">OPCIONES</td>            
             <td></td>
             <td></td>
@@ -272,7 +297,7 @@ function confirmacion(id) {
         <?php
         //include('conexion.php');
         
-        $consulta="SELECT grupo.id_grupo,grupo.nombre,grupo.id_retiro,grupo.total,grupo.abierto FROM grupo INNER JOIN retiros ON grupo.id_retiro=retiros.id_retiro WHERE retiros.abierto=2";
+        $consulta="SELECT grupo.id_grupo,grupo.nombre,grupo.id_retiro,grupo.total,grupo.abierto,grupo.color FROM grupo INNER JOIN retiros ON grupo.id_retiro=retiros.id_retiro WHERE retiros.abierto=2";
 		$res=mysql_query($consulta);
 		$nombreh="";
 		$casos_totales=0;
@@ -281,6 +306,8 @@ function confirmacion(id) {
 				$nombreh=$row['nombre'];
 				$nombreh=ucfirst(utf8_decode($nombreh));
 				$id_grupo=$row['id_grupo'];
+                                $colorh=$row['color'];
+                                
 				if($row['abierto']=="2"){
 					$abierto="<img src='../diseno/img/star_on.png' />";
 				}else{
@@ -306,6 +333,7 @@ function confirmacion(id) {
 						<td style='text-align: center;'>$nombreh</td>
 						<td style='text-align: center;'>$capacidad</td>
 						<td style='text-align: center;'>$actuales</td>
+                                                <td style='text-align: center;background-color:$colorh'>&nbsp;&nbsp;</td>
 						<td style='text-align: center;'><a href='grupos.php?mod=true&id=$id_grupo'><img src='../diseno/img/next.png' /></a></td>
 				
 				<td style='text-align: center;'><a href=\"javascript:confirmacion($id_grupo)\"><img src='../diseno/img/close_16.png' /></a></td></tr> ";
@@ -330,8 +358,8 @@ if(isset($_REQUEST['agregar_grupo'])){
  $nombre=$_POST['nombre'];
  $capacidad = $_POST['capacidad'];
  $abierto=$_POST['abierto'];
- 
- $consulta_new="INSERT INTO grupo(id_grupo,id_retiro,nombre,total,abierto) VALUES(0,$retiro,\"".mysql_real_escape_string($nombre)."\",$capacidad,$abierto)";
+ $color=$_POST['color'];
+ $consulta_new="INSERT INTO grupo(id_grupo,id_retiro,nombre,total,abierto,color) VALUES(0,$retiro,\"".mysql_real_escape_string($nombre)."\",$capacidad,$abierto,\"".$color."\")";
 
  if(mysql_query($consulta_new)){
 		echo "<script>  alert('Grupo agregado exitosamente.'); </script>";
@@ -344,9 +372,10 @@ if(isset($_REQUEST['modificar_grupo'])){
  $nombre=$_POST['nombre'];
  $capacidad = $_POST['capacidad'];
  $abierto=$_POST['abierto'];
+ $color=$_POST['color'];
  $id=$_POST['id'];
  
- $consulta_up="UPDATE grupo SET nombre=\"".mysql_real_escape_string($nombre)."\", id_retiro=$retiro, total=$capacidad, abierto=$abierto WHERE id_grupo=$id";
+ $consulta_up="UPDATE grupo SET nombre=\"".mysql_real_escape_string($nombre)."\", id_retiro=$retiro, total=$capacidad, abierto=$abierto,color=\"".mysql_real_escape_string($color)."\" WHERE id_grupo=$id";
  
  if(mysql_query($consulta_up)){
 		echo "<script>  alert('Se han guardado los cambios.'); </script>";

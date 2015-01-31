@@ -6,7 +6,7 @@ header('Content-Type: text/html; charset=UTF-8');
 	require("fpdf.php");
 	
 	$id=$_GET['id'];
-	$consulta_hermano="SELECT hermanos.nombres,hermanos.pago,hermanos.apellidos,hermanos.f_nac,hermanos.edad,hermanos.genero,hermanos.telefono,hermanos.celular,hermanos.correo,hermanos.direccion, hermanos.bautizado,hermanos.ccdl,modulos_ccdl.nombre as modulo,hermanos.jaa,hermanos.gj,hermanos.ed,hermanos.fv,hermanos.nom_grupo_fv,hermanos.esp_aler,hermanos.medicamento,hermanos.contacto1,hermanos.telefono1,hermanos.celular1,hermanos.parentesco1,hermanos.correo1,hermanos.contacto2,hermanos.telefono2,hermanos.celular2,hermanos.parentesco2,hermanos.correo2,tallas.nombre,hermanos.ged,hermanos.ministerio FROM hermanos
+	$consulta_hermano="SELECT hermanos.nombres,hermanos.pago,hermanos.apellidos,hermanos.f_nac,hermanos.edad,hermanos.genero,hermanos.telefono,hermanos.celular,hermanos.correo,hermanos.direccion, hermanos.bautizado,hermanos.ccdl,modulos_ccdl.nombre as modulo,hermanos.jaa,hermanos.gj,hermanos.ed,hermanos.fv,hermanos.nom_grupo_fv,hermanos.esp_aler,hermanos.medicamento,hermanos.contacto1,hermanos.telefono1,hermanos.celular1,hermanos.parentesco1,hermanos.correo1,hermanos.contacto2,hermanos.telefono2,hermanos.celular2,hermanos.parentesco2,hermanos.correo2,tallas.nombre,hermanos.ged,hermanos.ministerio,hermanos.valorPago FROM hermanos
 	INNER JOIN modulos_ccdl
 	ON modulos_ccdl.id_modulo=hermanos.modulo
 	INNER JOIN tallas
@@ -52,7 +52,8 @@ header('Content-Type: text/html; charset=UTF-8');
 				$parentesco2=ucfirst(utf8_decode($row['parentesco2']));
 				$pago = $row['pago'];
                                 $fv=$row['fv'];
-                                $nom_grupo_fv=  $row['nom_grupo_fv'];
+                                $nom_grupo_fv=$row['nom_grupo_fv'];
+                                $valorPago=  $row['valorPago'];
 			}
 			$contador=0;
 			$pago="no";
@@ -126,6 +127,10 @@ header('Content-Type: text/html; charset=UTF-8');
 	$pdf->SetFont('Arial','',9);
         $pdf->Cell(14);
         $pdf->Cell(1,0,'CLAUSULA COMPROMISO: ',0,1,'L',false);
+        $pdf->Cell(125);
+        $pdf->SetFont('Arial','B',14);
+	$pdf->Cell(1,0,'Recibo por: $'.$valorPago.'',0,1,'L',false);
+        $pdf->SetFont('Arial','',9);
 	$pdf->Ln(5);
         $pdf->Cell(15);
 	$pdf->MultiCell(160,4,'Por este medio doy fe que es de mi conocimiento el reglamento establecido por el Ministerio JAA y me comprometo a cumplirlo y acatar todas las indicaciones que se me den en el centro de retiros. Ademas me comprometo a permanecer dentro de las instalaciones del Centro de Retiros  Dado que  la falta al reglamento  es considerada como falta grave por el Ministerio JAA, asumo las consecuencias que conlleve esto.',1);
@@ -196,6 +201,10 @@ header('Content-Type: text/html; charset=UTF-8');
 	$pdf->SetFont('Arial','',9);
         $pdf->Cell(14);
         $pdf->Cell(1,0,'CLAUSULA COMPROMISO: ',0,1,'L',false);
+        $pdf->Cell(125);
+        $pdf->SetFont('Arial','B',14);
+	$pdf->Cell(1,0,'Recibo por: $'.$valorPago.'',0,1,'L',false);
+        $pdf->SetFont('Arial','',9);
 	$pdf->Ln(5);
         $pdf->Cell(15);
 	$pdf->MultiCell(160,4,'Por este medio doy fe que es de mi conocimiento el reglamento establecido por el Ministerio JAA y me comprometo a cumplirlo y acatar todas las indicaciones que se me den en el centro de retiros. Ademas me comprometo a permanecer dentro de las instalaciones del Centro de Retiros  Dado que  la falta al reglamento  es considerada como falta grave por el Ministerio JAA, asumo las consecuencias que conlleve esto.',1);

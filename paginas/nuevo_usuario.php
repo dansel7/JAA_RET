@@ -178,15 +178,15 @@ function mostrar_esp_fv(objeto){
             <tr><td colspan="3"><br /></td></tr>
             <tr>
             <td>Direccion:</td>
-            <td>Correo electr&oacute;nico:</td>
-            <td>DUI:</td>
+            <td colspan="2">Correo electr&oacute;nico:</td>
+            
             </tr>
             <tr>
                 <td>
 				<textarea name="direccion" id="direccion" cols="60" rows="10" class="textbox_white" required="required" placeholder="Ingrese aqui direcci&oacute;n" style="font-size:12px;font-family:Arial;"></textarea>
 				</td>
                 <td><input type="email" name="correo_electronico" size="22" value="" id="correo_electronico" class="textbox_white" required="required" placeholder="name@example.com" /></td>
-                <td><input type="text" name="dui" id= "dui" class="textbox_white" placeholder="Ingrese aqui solo numeros" onkeypress="return validar_numeros(event)" /></td>
+                
             </tr>
             <tr><td colspan="3"><br /></td></tr>
             <tr>
@@ -393,7 +393,7 @@ if(isset($_REQUEST['agregar'])){
 	$direccion=htmlspecialchars($direccion);
 	$correo_usuario=$_POST['correo_electronico'];
 	$genero=$_POST['sexo'];
-	$dui=$_POST['dui'];
+	
 	$tel=$_POST['tel'];
 	$cel=$_POST['cel'];
 	$f_nac=$_POST['f_nacimiento'];
@@ -440,7 +440,7 @@ TIMESTAMPDIFF(YEAR, \"".$f_nac."\", NOW()) as Edad";
 		
 	$id_usuario=$_SESSION['user_jaa'];
 
-			$consulta_new="INSERT INTO hermanos(id_hermano,nombres,apellidos,genero,direccion,correo,dui,telefono,celular,f_nac,p_nac,enf,ope,esp_ope,aler,esp_aler,ged,ccdl,bautizado,modulo,talla,edad,id_usuario,medicamento,contacto1,parentesco1,telefono1,celular1,correo1,contacto2,parentesco2,telefono2,celular2,correo2,ministerio,gj,fv,ed,jaa,nom_grupo_fv) VALUES(0,\"".mysql_real_escape_string($nombres)."\",\"".mysql_real_escape_string($apellidos)."\",\"".mysql_real_escape_string($genero)."\",\"".mysql_real_escape_string($direccion)."\",\"".mysql_real_escape_string($correo_usuario)."\",\"".mysql_real_escape_string($dui)."\",\"".mysql_real_escape_string($tel)."\",\"".mysql_real_escape_string($cel)."\",\"".mysql_real_escape_string($f_nac)."\",\"68\",\"".mysql_real_escape_string($enf)."\",\"".mysql_real_escape_string($ope)."\",\"".mysql_real_escape_string($esp_ope)."\",\"".mysql_real_escape_string($aler)."\",\"".mysql_real_escape_string($esp_aler)."\",\"".mysql_real_escape_string($ged)."\",\"".mysql_real_escape_string($ccdl)."\",\"".mysql_real_escape_string($bautizado)."\",\"".mysql_real_escape_string($modulo)."\",\"".mysql_real_escape_string($talla)."\",\"".mysql_real_escape_string($edad)."\",\"".mysql_real_escape_string($id_usuario)."\",\"".mysql_real_escape_string($aler_med)."\",\"".mysql_real_escape_string($contacto1)."\",\"".mysql_real_escape_string($parentesco1)."\",\"".mysql_real_escape_string($telefono1)."\",\"".mysql_real_escape_string($celular1)."\",\"".mysql_real_escape_string($correo1)."\",\"".mysql_real_escape_string($contacto2)."\",\"".mysql_real_escape_string($parentesco2)."\",\"".mysql_real_escape_string($telefono2)."\",\"".mysql_real_escape_string($celular2)."\",\"".mysql_real_escape_string($correo2)."\",\"".mysql_real_escape_string($ministerio)."\",\"".mysql_real_escape_string($gj)."\",\"".mysql_real_escape_string($fv)."\",\"".mysql_real_escape_string($ed)."\",\"".mysql_real_escape_string($jaa)."\",\"".mysql_real_escape_string($nom_grupo_fv)."\")";
+			$consulta_new="INSERT INTO hermanos(id_hermano,nombres,apellidos,genero,direccion,correo,telefono,celular,f_nac,p_nac,enf,ope,esp_ope,aler,esp_aler,ged,ccdl,bautizado,modulo,talla,edad,id_usuario,medicamento,contacto1,parentesco1,telefono1,celular1,correo1,contacto2,parentesco2,telefono2,celular2,correo2,ministerio,gj,fv,ed,jaa,nom_grupo_fv) VALUES(0,\"".mysql_real_escape_string($nombres)."\",\"".mysql_real_escape_string($apellidos)."\",\"".mysql_real_escape_string($genero)."\",\"".mysql_real_escape_string($direccion)."\",\"".mysql_real_escape_string($correo_usuario)."\",\"".mysql_real_escape_string($tel)."\",\"".mysql_real_escape_string($cel)."\",\"".mysql_real_escape_string($f_nac)."\",\"68\",\"".mysql_real_escape_string($enf)."\",\"".mysql_real_escape_string($ope)."\",\"".mysql_real_escape_string($esp_ope)."\",\"".mysql_real_escape_string($aler)."\",\"".mysql_real_escape_string($esp_aler)."\",\"".mysql_real_escape_string($ged)."\",\"".mysql_real_escape_string($ccdl)."\",\"".mysql_real_escape_string($bautizado)."\",\"".mysql_real_escape_string($modulo)."\",\"".mysql_real_escape_string($talla)."\",\"".mysql_real_escape_string($edad)."\",\"".mysql_real_escape_string($id_usuario)."\",\"".mysql_real_escape_string($aler_med)."\",\"".mysql_real_escape_string($contacto1)."\",\"".mysql_real_escape_string($parentesco1)."\",\"".mysql_real_escape_string($telefono1)."\",\"".mysql_real_escape_string($celular1)."\",\"".mysql_real_escape_string($correo1)."\",\"".mysql_real_escape_string($contacto2)."\",\"".mysql_real_escape_string($parentesco2)."\",\"".mysql_real_escape_string($telefono2)."\",\"".mysql_real_escape_string($celular2)."\",\"".mysql_real_escape_string($correo2)."\",\"".mysql_real_escape_string($ministerio)."\",\"".mysql_real_escape_string($gj)."\",\"".mysql_real_escape_string($fv)."\",\"".mysql_real_escape_string($ed)."\",\"".mysql_real_escape_string($jaa)."\",\"".mysql_real_escape_string($nom_grupo_fv)."\")";
 
 	if(mysql_query($consulta_new)){
 		echo "<script>  alert('Usuario agregado exitosamente.'); </script>";
@@ -457,7 +457,7 @@ TIMESTAMPDIFF(YEAR, \"".$f_nac."\", NOW()) as Edad";
 mysql_close();
 }
 else{
-	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://retirosjaa.jovenesjaa.com/index.php'>");//env�o al usuario a la pag. de inicio 
+	echo("<META HTTP-EQUIV='Refresh' CONTENT='0; URL=http://localhost/jaa_retiros/index.php'>");//env�o al usuario a la pag. de inicio 
 	    exit();
 }
 ?>
